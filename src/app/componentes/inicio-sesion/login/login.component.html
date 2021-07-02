@@ -1,0 +1,27 @@
+<div class="center">
+    <div class="login">
+        <img class="image" src="./assets/imagenes/LogoTextoSuperior.png">
+        <br>
+
+        <form [formGroup] = "formGroup" (ngSubmit)="ingresar()">
+
+            <mat-form-field class="input" appearance="fill">
+                <mat-label>Correo</mat-label>
+                <input matInput type="email" name="email" formControlName="usuario" autocapitalize="off" placeholder="correo@example.com"> 
+                <!--validaciones campo correo-->
+                <mat-error *ngIf="formGroup.controls.usuario.hasError('email')">Email no valido</mat-error>
+                <mat-error *ngIf="formGroup.controls.usuario.hasError('required')">Email requerido</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="input" appearance="fill">
+                <mat-label>Contraseña</mat-label>
+                <input matInput type="password" name="password" formControlName="contrasena" autocomplete="off">
+                <!--validaciones campo constraseña-->
+                <mat-error *ngIf="formGroup.controls.contrasena.hasError('required')">Contraseña requerida</mat-error>
+            </mat-form-field>
+            <br>
+            <button type="submit" class="button" mat-raised-button color="primary" [disabled]="formGroup.invalid">Iniciar sesión</button>
+
+        </form>
+    </div>
+</div>
