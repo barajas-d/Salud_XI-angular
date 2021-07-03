@@ -1,6 +1,22 @@
-<mat-grid-list cols="12" rowHeight="3:1">
-    <mat-grid-tile>1</mat-grid-tile> 
-    <mat-grid-tile>2</mat-grid-tile>
-    <mat-grid-tile>3</mat-grid-tile>
-    <mat-grid-tile>4</mat-grid-tile>
-</mat-grid-list>
+<div class="pantalla">
+    <br>
+    <div class="contenedor">
+
+        <div class="centrar">
+            <form [formGroup] = "formGroup" (ngSubmit)="navigateListarCitas()">
+                
+                <mat-form-field class="input" appearance="fill">
+                    <mat-label>Cedula usuario</mat-label>
+                    <input matInput [(ngModel)]="cedulaUsuario" type="text" name="cedulaUsuario" formControlName="cedulaUsuario" autocapitalize="off" placeholder="Cedula usuario"> 
+                    <!--validaciones input cedula usuario-->
+                    <mat-error *ngIf="formGroup.controls.cedulaUsuario.hasError('required')">Ingrese un numero de cedula</mat-error>
+                    <mat-error *ngIf="formGroup.controls.cedulaUsuario.hasError('pattern')">Valor no numérico</mat-error>
+                </mat-form-field>
+                
+
+                <button type="submit" class="button" mat-raised-button color="primary" [disabled]="formGroup.invalid">Buscar usuario</button> 
+            </form>
+        </div>
+
+    </div>
+</div>

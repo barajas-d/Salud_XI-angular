@@ -8,7 +8,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
   formGroup: FormGroup;
-  regularUsuario = /asda/;
 
   constructor(private formBuilder: FormBuilder) { 
 
@@ -21,7 +20,7 @@ export class LoginComponent implements OnInit {
       contrasena: new FormControl('', [
         Validators.required
       ])
-    })
+    });
   }
 
   ngOnInit(): void {

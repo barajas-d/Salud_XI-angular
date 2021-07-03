@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,17 +19,24 @@ import { MatButtonModule } from '@angular/material/button';
 import { NavbarCallCenterComponent } from './componentes/layouts/navbar-call-center/navbar-call-center.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { ListarCitasComponent } from './componentes/gestion-citas-medicas/listar-citas/listar-citas.component';
+import { CrearCitasComponent } from './componentes/gestion-citas-medicas/crear-citas/crear-citas.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     BuscarCitasComponent,
     LoginComponent,
-    NavbarCallCenterComponent
+    NavbarCallCenterComponent,
+    ListarCitasComponent,
+    CrearCitasComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     ReactiveFormsModule,
     MatGridListModule,
     BrowserAnimationsModule,
@@ -36,7 +44,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatButtonModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
