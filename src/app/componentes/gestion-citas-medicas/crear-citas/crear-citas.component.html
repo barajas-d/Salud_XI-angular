@@ -1,1 +1,34 @@
-<p>crear-citas works!</p>
+
+<div class="content">
+
+  <form [formGroup]="formGroup" (ngSubmit)="addCitaMedica()">
+    <div class="left-form">
+    <h4>Tipo de cita</h4>
+      <mat-form-field appearance="fill">
+        <mat-label>Tipo de cita</mat-label>
+        <mat-select [(ngModel)]="tipoCitaSeleccionada" formControlName="tipoCita">
+          <mat-option *ngFor="let tipoCita of listaTiposCita" [value]="tipoCita.id">
+            {{tipoCita.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    
+    <div class="right-form">  
+      <h4>Sintomatologia</h4>
+      <mat-form-field appearance="fill">
+        <mat-label>Sintomatologia</mat-label>
+        <mat-select [(ngModel)]="sintomatologiaSeleccionada" formControlName="sintomatologia">
+          <mat-option *ngFor="let sintomatologia of listaSintomatologias" [value]="sintomatologia.id">
+            {{sintomatologia.detalle}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="button">  
+      <button class="button-success"type="submit" class="button" mat-raised-button color="accent" [disabled]="formGroup.invalid">Crear cita</button>
+    </div>
+  </form>
+
+</div>

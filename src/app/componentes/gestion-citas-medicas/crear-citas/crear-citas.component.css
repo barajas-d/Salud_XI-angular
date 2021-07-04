@@ -1,0 +1,25 @@
+.content{
+    display: flex;
+    justify-content: center;
+}
+
+.right-form{
+    float: left;
+    width: 40vh;
+    padding-left: 5vh;
+}
+
+.left-form{
+    float: left;
+    width: 40vh;
+    padding-right: 5vh;
+}
+
+.button{
+    clear: both;
+    text-align: left;
+}
+
+mat-form-field {
+    width: 100%;
+}

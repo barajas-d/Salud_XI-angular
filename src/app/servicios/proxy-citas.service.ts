@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CitaDTO } from '../ModeloDTO/cita-dto';
+import { SintomatologiaDTO } from '../ModeloDTO/sintomatologia-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,11 @@ export class ProxyCitasService {
   //Obtener las citas medicas de un usuario por medio de la cedula
   getCitasByCCUser(cedulaUsuario: Number){
     console.log('get: ', this.UrlBase + '/' + cedulaUsuario)
-    return this.httpClient.get<CitaDTO[]>(this.UrlBase + '/' + cedulaUsuario)
+    return this.httpClient.get<CitaDTO[]>(this.UrlBase + '/' + cedulaUsuario);
   }
 
+  //Obtener las sintomatologias para la creacion de nuevas citas
+  getAllSintomatologias(){
+    return this.httpClient.get<SintomatologiaDTO[]>(this.UrlBase + '/sintomatologias');
+  }
 }

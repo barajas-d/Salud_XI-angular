@@ -22,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { ListarCitasComponent } from './componentes/gestion-citas-medicas/listar-citas/listar-citas.component';
 import { CrearCitasComponent } from './componentes/gestion-citas-medicas/crear-citas/crear-citas.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { CrearCitasComponent } from './componentes/gestion-citas-medicas/crear-c
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
