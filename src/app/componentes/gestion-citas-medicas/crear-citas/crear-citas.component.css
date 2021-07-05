@@ -3,16 +3,15 @@
     justify-content: center;
 }
 
-.right-form{
-    float: left;
-    width: 40vh;
-    padding-left: 5vh;
-}
-
 .left-form{
     float: left;
     width: 40vh;
-    padding-right: 5vh;
+    padding-right: 10vh;
+}
+
+.right-form{
+    float: left;
+    width: 40vh;
 }
 
 .button{

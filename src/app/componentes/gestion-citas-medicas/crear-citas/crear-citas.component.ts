@@ -14,7 +14,7 @@ import { ProxyTiposCitaService } from 'src/app/servicios/proxy-tipos-cita.servic
 export class CrearCitasComponent implements OnInit {
   
   //Datos para crear los formularios
-  @Input() usuarioId: Number = 0;
+  @Input() cedulaUsuario: Number;
   listaTiposCita: TipoCitaDTO[] = [];
   listaSintomatologias: SintomatologiaDTO[] = [];
 
@@ -43,7 +43,7 @@ export class CrearCitasComponent implements OnInit {
 
   //crear cita medica
   addCitaMedica(){
-    this.servicioProxyCitas.addCita(new CitaDTO(this.tipoCitaSeleccionada, this.usuarioId, this.sintomatologiaSeleccionada)).subscribe(
+    this.servicioProxyCitas.addCita(new CitaDTO(this.tipoCitaSeleccionada, this.cedulaUsuario, this.sintomatologiaSeleccionada)).subscribe( //Cambiar por el id del usuario
       result => {
         console.log('result: ' + result.id);
       }

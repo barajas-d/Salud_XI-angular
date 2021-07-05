@@ -13,7 +13,6 @@ import { ProxyCitasService } from 'src/app/servicios/proxy-citas.service';
 export class ListarCitasComponent implements OnInit {
 
   listaCitasMedicasUsuario: CitaDTO[];
-  loadCitasStatus = false;
   //parametros en la ruta
   cedulaUsuario: Number;
 
@@ -32,7 +31,6 @@ export class ListarCitasComponent implements OnInit {
     this.servicioProxyCitas.getCitasByCCUser(this.cedulaUsuario).subscribe(
       result => {
         this.listaCitasMedicasUsuario = result;
-        this.loadCitasStatus = true;
         console.log(result);
       },
       error => {
