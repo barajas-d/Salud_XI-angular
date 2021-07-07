@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CitaDTO } from 'src/app/ModeloDTO/cita-dto';
-import { SintomatologiaDTO } from 'src/app/ModeloDTO/sintomatologia-dto';
-import { TipoCitaDTO } from 'src/app/ModeloDTO/tipo-cita-dto';
+import { CitaDTO } from 'src/app/modeloDTO/cita-dto';
+import { SintomatologiaDTO } from 'src/app/modeloDTO/sintomatologia-dto';
+import { TipoCitaDTO } from 'src/app/modeloDTO/tipo-cita-dto';
 import { ProxyCitasService } from 'src/app/servicios/proxy-citas.service';
 import { ProxyTiposCitaService } from 'src/app/servicios/proxy-tipos-cita.service';
 
@@ -48,7 +48,6 @@ export class CrearCitasComponent implements OnInit {
         console.log('result: ' + result.id);
       }
     );
-    console.log('cita seleccionada: ' + this.tipoCitaSeleccionada + ' sintomatologia: ' + this.sintomatologiaSeleccionada);
   }
 
   //obtener sintomatologias para el form

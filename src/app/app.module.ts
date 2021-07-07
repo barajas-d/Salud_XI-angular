@@ -30,6 +30,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ListarMedicosComponent } from './componentes/gestion-medicos/listar-medicos/listar-medicos.component';
+import { CrearMedicosComponent } from './componentes/gestion-medicos/crear-medicos/crear-medicos.component';
+import { CrearCuotaModeradoraComponent } from './componentes/gestion-cuota-moderadora/crear-cuota-moderadora/crear-cuota-moderadora.component';
+import { ListarCuotaModeradoraComponent } from './componentes/gestion-cuota-moderadora/listar-cuota-moderadora/listar-cuota-moderadora.component';
+import { ListarTiposCitaComponent } from './componentes/gestion-tipo-citas/listar-tipos-cita/listar-tipos-cita.component';
+import { CrearTiposCitaComponent } from './componentes/gestion-tipo-citas/crear-tipos-cita/crear-tipos-cita.component';
+import { ListarTipoCitaEspecialidadComponent } from './componentes/gestion-tipo-cita-especialidad/listar-tipo-cita-especialidad/listar-tipo-cita-especialidad.component';
+import { CrearTipoCitaEspecialidadComponent } from './componentes/gestion-tipo-cita-especialidad/crear-tipo-cita-especialidad/crear-tipo-cita-especialidad.component';
+import { ActualizarTipoCitaEspecialidadComponent } from './componentes/gestion-tipo-cita-especialidad/actualizar-tipo-cita-especialidad/actualizar-tipo-cita-especialidad.component';
+import { ListarAgendaComponent } from './componentes/gestion-agendas/listar-agenda/listar-agenda.component';
+import { ListarCitasPendientesComponent } from './componentes/gestion-citas-pendientes/listar-citas-pendientes/listar-citas-pendientes.component';
 
 
 @NgModule({
@@ -42,7 +53,18 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     CrearCitasComponent,
     ListarUsuariosComponent,
     CrearUsuariosComponent,
-    GestionUsuariosComponent
+    GestionUsuariosComponent,
+    ListarMedicosComponent,
+    CrearMedicosComponent,
+    CrearCuotaModeradoraComponent,
+    ListarCuotaModeradoraComponent,
+    ListarTiposCitaComponent,
+    CrearTiposCitaComponent,
+    ListarTipoCitaEspecialidadComponent,
+    CrearTipoCitaEspecialidadComponent,
+    ActualizarTipoCitaEspecialidadComponent,
+    ListarAgendaComponent,
+    ListarCitasPendientesComponent
   ],
   imports: [
     BrowserModule,

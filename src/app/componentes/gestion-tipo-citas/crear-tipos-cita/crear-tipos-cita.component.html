@@ -1,0 +1,28 @@
+<form [formGroup]="formGroup" (ngSubmit)="addTipoCita()" >
+
+    <div class="left-form">
+        <h4>Nombre</h4>
+        <mat-form-field class="input" appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput [(ngModel)]="nombre" type="text" name="Nombre" formControlName="nombre" autocomplete="off">
+            <!--validaciones campo nombre-->
+            <mat-error *ngIf="formGroup.controls.nombre.hasError('required')">Nombre requerido</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="right-form">
+        <h4>Duración en minutos</h4>
+        <mat-form-field class="input" appearance="fill">
+            <mat-label>Duración en minutos</mat-label>
+            <input matInput [(ngModel)]="duracion" type="text" name="duracion" formControlName="duracion" autocomplete="off">
+            <!--validaciones campo duración-->
+            <mat-error *ngIf="formGroup.controls.duracion.hasError('required')">Cedula requerida</mat-error>
+            <mat-error *ngIf="formGroup.controls.duracion.hasError('pattern')">Solo numeros enteros</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="button">  
+        <button class="button-success" type="submit" class="button" mat-raised-button color="accent" [disabled]="formGroup.invalid">Crear tipo de cita</button>
+    </div>
+
+</form>

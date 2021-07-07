@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { resolve } from 'dns';
 import { promise } from 'protractor';
-import { CitaDTO } from 'src/app/ModeloDTO/cita-dto';
+import { CitaDTO } from 'src/app/modeloDTO/cita-dto';
 import { ProxyCitasService } from 'src/app/servicios/proxy-citas.service';
 import { resourceLimits } from 'worker_threads';
 

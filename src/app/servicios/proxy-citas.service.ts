@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CitaDTO } from '../ModeloDTO/cita-dto';
-import { SintomatologiaDTO } from '../ModeloDTO/sintomatologia-dto';
+import { CitaDTO } from '../modeloDTO/cita-dto';
+import { SintomatologiaDTO } from '../modeloDTO/sintomatologia-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,6 @@ export class ProxyCitasService {
 
   //Crear una nueva cita
   addCita(nuevaCita: CitaDTO){
-    console.log('post: ', this.UrlBase + '/add')
     let json = JSON.stringify(nuevaCita)
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.httpClient.post<CitaDTO>(this.UrlBase + '/add', json, {headers: headers});
@@ -27,7 +26,6 @@ export class ProxyCitasService {
 
   //Eliminar una cita no agendada
   deleteCita(idCita: Number){
-    console.log('delete: ', this.UrlBase + '/add')
     return this.httpClient.delete(this.UrlBase + '/delete/' + idCita);
   }
 

@@ -1,0 +1,57 @@
+<form [formGroup]="formGroup" (ngSubmit)="addMedico()" >
+
+    <div class="left-form">
+        <h4>Nombre</h4>
+        <mat-form-field class="input" appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput [(ngModel)]="nombre" type="text" name="Nombre" formControlName="nombre" autocomplete="off">
+            <!--validaciones campo nombre-->
+            <mat-error *ngIf="formGroup.controls.nombre.hasError('required')">Nombre requerido</mat-error>
+        </mat-form-field>
+
+        <h4>Especialidad</h4>
+        <mat-form-field appearance="fill">
+        <mat-label>Especialidad</mat-label>
+        <mat-select [(ngModel)]="especialidadSeleccionada" formControlName="especialidad">
+            <mat-option *ngFor="let especialidad of listaEspecialidades" [value]="especialidad.id">
+            {{especialidad.nombre}}
+            </mat-option>
+        </mat-select>
+        </mat-form-field>
+
+        <h4>Centro médico asignado</h4>
+        <mat-form-field appearance="fill">
+        <mat-label>Centro médico</mat-label>
+        <mat-select [(ngModel)]="centroMedicoSeleccionado" formControlName="centroMedico">
+            <mat-option *ngFor="let centroMedico of listaCentrosMedicos" [value]="centroMedico.id">
+            {{centroMedico.nombre}}
+            </mat-option>
+        </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="right-form">
+        <h4>Cedula</h4>
+        <mat-form-field class="input" appearance="fill">
+            <mat-label>Cedula</mat-label>
+            <input matInput [(ngModel)]="cedula" type="text" name="Cedula" formControlName="cedula" autocomplete="off">
+            <!--validaciones campo cedula-->
+            <mat-error *ngIf="formGroup.controls.cedula.hasError('required')">Cedula requerida</mat-error>
+            <mat-error *ngIf="formGroup.controls.cedula.hasError('pattern')">Solo valores numéricos</mat-error>
+        </mat-form-field>
+
+        <h4>Intensidad horaria</h4>
+        <mat-form-field appearance="fill">
+        <mat-label>Intensidad horaria</mat-label>
+        <mat-select [(ngModel)]="intensidadHorariaSeleccionada" formControlName="intensidadHoraria">
+            <mat-option [value]="4"> 4 Horas </mat-option>
+            <mat-option [value]="8"> 8 Horas </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="button">  
+        <button class="button-success" type="submit" class="button" mat-raised-button color="accent" [disabled]="formGroup.invalid">Crear médico</button>
+    </div>
+
+</form>

@@ -1,7 +1,7 @@
 import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CitaDTO } from 'src/app/ModeloDTO/cita-dto';
+import { CitaDTO } from 'src/app/modeloDTO/cita-dto';
 import { ProxyCitasService } from 'src/app/servicios/proxy-citas.service';
 
 

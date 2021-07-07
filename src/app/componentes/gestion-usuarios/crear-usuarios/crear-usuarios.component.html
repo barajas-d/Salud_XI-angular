@@ -1,1 +1,56 @@
-<p>crear-usuarios works!</p>
+<form [formGroup]="formGroup" (ngSubmit)="addUsuario()" >
+
+    <div class="left-form">
+        <h4>Nombre</h4>
+        <mat-form-field class="input" appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput [(ngModel)]="nombre" type="text" name="Nombre" formControlName="nombre" autocomplete="off">
+            <!--validaciones campo nombre-->
+            <mat-error *ngIf="formGroup.controls.nombre.hasError('required')">Nombre requerido</mat-error>
+        </mat-form-field>
+
+        <h4>Correo</h4>
+        <mat-form-field class="input" appearance="fill">
+            <mat-label>Correo</mat-label>
+            <input matInput [(ngModel)]="correo" type="email" name="Correo" formControlName="correo" autocomplete="off">
+            <!--validaciones campo correo-->
+            <mat-error *ngIf="formGroup.controls.correo.hasError('required')">Correo requerido</mat-error>
+        </mat-form-field>
+
+        <h4>Ubicación de residencia</h4>
+        <mat-form-field appearance="fill">
+        <mat-label>Ubicación de residencia</mat-label>
+        <mat-select [(ngModel)]="ubicacionSeleccionada" formControlName="ubicacion">
+            <mat-option *ngFor="let ubicacion of listaUbicaciones" [value]="ubicacion.id">
+            {{ubicacion.barrio}}
+            </mat-option>
+        </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="right-form">
+        <h4>Cedula</h4>
+        <mat-form-field class="input" appearance="fill">
+            <mat-label>Cedula</mat-label>
+            <input matInput [(ngModel)]="cedula" type="text" name="Cedula" formControlName="cedula" autocomplete="off">
+            <!--validaciones campo cedula-->
+            <mat-error *ngIf="formGroup.controls.cedula.hasError('required')">Cedula requerida</mat-error>
+            <mat-error *ngIf="formGroup.controls.cedula.hasError('pattern')">Solo valores numéricos</mat-error>
+        </mat-form-field>
+
+        <h4>Tipo de contrato</h4>
+        <mat-form-field appearance="fill">
+        <mat-label>Tipo de contrato</mat-label>
+        <mat-select [(ngModel)]="tipoContratoSeleccionado" formControlName="tipoContrato">
+          <mat-option *ngFor="let tipoContrato of listaTiposContrato" [value]="tipoContrato.id">
+            {{tipoContrato.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="button">  
+        <button class="button-success" type="submit" class="button" mat-raised-button color="accent" [disabled]="formGroup.invalid">Crear usuario</button>
+    </div>
+
+</form>
