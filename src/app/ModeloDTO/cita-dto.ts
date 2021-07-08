@@ -1,3 +1,5 @@
+import { Timestamp } from "rxjs";
+
 export class CitaDTO {
     id: Number;
     asignada: Boolean;

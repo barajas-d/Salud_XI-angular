@@ -47,4 +47,15 @@ export class ProxyCuotaModeradoraService {
   getAllTiposContrato(){
     return this.httpClient.get<TipoContratoDto[]>(this.UrlBase + '/tiposContrato');
   }
+
+  //Obtener cuotas moderadoras
+  getCuotasModeradoras(){
+    return this.httpClient.get<CuotaModeradoraDto[]>(this.UrlBase);
+  }
+
+  //Obtener valor de una cuota moderadora
+  getCuotaModeradora(tipoCitaId: Number, tipoContratoId: Number){
+    return this.httpClient.get<CuotaModeradoraDto>(this.UrlBase + '/valor/' + tipoCitaId + '/' + tipoContratoId);
+  }
+
 }

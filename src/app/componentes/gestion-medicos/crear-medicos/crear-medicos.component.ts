@@ -36,7 +36,6 @@ export class CrearMedicosComponent implements OnInit {
     this.getAllCentrosMedicos();
 
     //Validaciones del formulario
-    //Validaciones del formulario
     this.formGroup = this.formBuilder.group({
       nombre: new FormControl('', [
         Validators.required
