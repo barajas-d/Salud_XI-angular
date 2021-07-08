@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { GenerarAgendasComponent } from './componentes/gestion-agendas/generar-agendas/generar-agendas.component';
 import { BuscarCitasComponent } from './componentes/gestion-citas-medicas/buscar-citas/buscar-citas.component';
 import { CrearCitasComponent } from './componentes/gestion-citas-medicas/crear-citas/crear-citas.component';
 import { ListarCitasComponent } from './componentes/gestion-citas-medicas/listar-citas/listar-citas.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: 'crear-cuotas-moderadoras', component: CrearCuotaModeradoraComponent},
   {path: 'listar-tipo-cita-especialidad', component: ListarTipoCitaEspecialidadComponent},
   {path: 'crear-tipo-cita-especialidad', component: CrearTipoCitaEspecialidadComponent},
+  {path: 'generar-agendas', component: GenerarAgendasComponent},
   {path: 'login', component: LoginComponent}
 ];
 

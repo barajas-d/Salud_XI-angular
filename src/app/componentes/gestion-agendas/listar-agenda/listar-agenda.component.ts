@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-listar-agenda',
@@ -7,7 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListarAgendaComponent implements OnInit {
 
-  constructor() { }
+  cedulaMedico: Number;
+
+  constructor(private rutaActiva: ActivatedRoute) { 
+    //Parametros pasados en la ruta
+    this.cedulaMedico = this.rutaActiva.snapshot.params.cedulaUsuario;
+
+    this.getCitasByCCMedico();
+  }
+
+  getCitasByCCMedico(){
+    
+  }
 
   ngOnInit(): void {
   }

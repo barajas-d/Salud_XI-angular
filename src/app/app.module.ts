@@ -41,7 +41,9 @@ import { CrearTipoCitaEspecialidadComponent } from './componentes/gestion-tipo-c
 import { ActualizarTipoCitaEspecialidadComponent } from './componentes/gestion-tipo-cita-especialidad/actualizar-tipo-cita-especialidad/actualizar-tipo-cita-especialidad.component';
 import { ListarAgendaComponent } from './componentes/gestion-agendas/listar-agenda/listar-agenda.component';
 import { ListarCitasPendientesComponent } from './componentes/gestion-citas-pendientes/listar-citas-pendientes/listar-citas-pendientes.component';
-
+import { GenerarAgendasComponent } from './componentes/gestion-agendas/generar-agendas/generar-agendas.component';
+import { ListarCitasSinAgendarComponent } from './componentes/gestion-agendas/listar-citas-sin-agendar/listar-citas-sin-agendar.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { ListarCitasPendientesComponent } from './componentes/gestion-citas-pend
     CrearTipoCitaEspecialidadComponent,
     ActualizarTipoCitaEspecialidadComponent,
     ListarAgendaComponent,
-    ListarCitasPendientesComponent
+    ListarCitasPendientesComponent,
+    GenerarAgendasComponent,
+    ListarCitasSinAgendarComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +84,8 @@ import { ListarCitasPendientesComponent } from './componentes/gestion-citas-pend
     MatIconModule,
     MatTableModule,
     MatSelectModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -13,10 +13,6 @@ export class ProxyCitasService {
 
   constructor(private httpClient: HttpClient) { }
 
-  prueba() {
-    console.log('servicio: ON');
-  }
-
   //Crear una nueva cita
   addCita(nuevaCita: CitaDTO){
     let json = JSON.stringify(nuevaCita)

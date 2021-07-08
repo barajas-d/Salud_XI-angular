@@ -25,7 +25,7 @@ export class ListarUsuariosComponent implements OnInit {
   }
 
   getUsuarios(page: Number, size: Number){
-    this.servicioProxyUsuario.getUsuarios(page , size).subscribe(
+    this.servicioProxyUsuario.getUsuarios(page, size).subscribe(
       result => {
         this.length = result['totalElements'];
         this.listaUsuarios = result['content'];

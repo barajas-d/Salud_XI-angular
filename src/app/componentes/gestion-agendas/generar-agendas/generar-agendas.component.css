@@ -1,0 +1,29 @@
+table {
+    width: 100%;
+}
+
+.center-icon{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+th{
+    width: 20%;
+}
+
+.contenedor-carga{
+    position: fixed;
+    background-color: rgb(227, 242, 253);
+    opacity: 0.5;
+    height: 100%;
+    width: 100%;
+    z-index: 10000;
+}
+
+.centrar-spiner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
