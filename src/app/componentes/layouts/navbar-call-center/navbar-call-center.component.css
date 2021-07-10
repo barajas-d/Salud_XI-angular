@@ -3,5 +3,14 @@
 }
 
 mat-toolbar{
-    position: absolute;
+    position: fixed;
+}
+
+.image{
+    display: flex;
+    height: 100%;
+}
+
+.logo-image{
+    width: auto;
 }

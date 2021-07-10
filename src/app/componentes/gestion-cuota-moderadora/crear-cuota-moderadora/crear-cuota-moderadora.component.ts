@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CuotaModeradoraDto } from 'src/app/modeloDTO/cuota-moderadora-dto';
 import { TipoCitaDTO } from 'src/app/modeloDTO/tipo-cita-dto';
 import { TipoContratoDto } from 'src/app/modeloDTO/tipo-contrato-dto';
@@ -27,7 +28,7 @@ export class CrearCuotaModeradoraComponent implements OnInit {
   //formGroup para validar campos del formulario
   formGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private servicioProxyCuotaModeradora: ProxyCuotaModeradoraService) { 
+  constructor(private formBuilder: FormBuilder, private servicioProxyCuotaModeradora: ProxyCuotaModeradoraService, private router: Router) { 
     //Obciones de formulario
     this.getAllTiposCitas();
     this.getAllTiposContrato();
@@ -52,6 +53,7 @@ export class CrearCuotaModeradoraComponent implements OnInit {
     this.servicioProxyCuotaModeradora.addCuotaModeradora(nuevaCuotaModeradora).subscribe(
       result => {
         console.log('result: ' + result.id);
+        this.navigateListarCuotasModeradoras();
       }
     );
   }
@@ -70,6 +72,10 @@ export class CrearCuotaModeradoraComponent implements OnInit {
         this.listaTiposContrato = result;
       }
     );
+  }
+
+  navigateListarCuotasModeradoras(){
+    this.router.navigate(['listar-cuotas-moderadoras']);
   }
 
   ngOnInit(): void {

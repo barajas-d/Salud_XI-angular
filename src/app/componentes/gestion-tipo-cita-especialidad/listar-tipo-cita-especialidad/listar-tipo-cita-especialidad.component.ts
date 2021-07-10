@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 import { TipoCitaEspecialidadDto } from 'src/app/modeloDTO/tipo-cita-especialidad-dto';
 import { ProxyTipoCitaEspecialidadService } from 'src/app/servicios/proxy-tipo-cita-especialidad.service';
 
@@ -19,7 +20,7 @@ export class ListarTipoCitaEspecialidadComponent implements OnInit {
 
   displayedColumns: string[] = ['especialidad', 'tipoCita', 'acciones'];
 
-  constructor(private servicioProxyTipoCitaEspecialidad: ProxyTipoCitaEspecialidadService) { 
+  constructor(private servicioProxyTipoCitaEspecialidad: ProxyTipoCitaEspecialidadService, private router: Router) { 
     this.getTipoCitaEspecialidad(0, this.pageSize);
   }
 
@@ -34,6 +35,10 @@ export class ListarTipoCitaEspecialidadComponent implements OnInit {
 
   changePage(pageEvent: PageEvent){
     this.getTipoCitaEspecialidad(pageEvent.pageIndex, pageEvent.pageSize);
+  }
+
+  navigateCrearTipoCitaEspecialidad(){
+    this.router.navigate(['crear-tipo-cita-especialidad']);
   }
 
   ngOnInit(): void {

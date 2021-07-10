@@ -17,3 +17,9 @@
 mat-form-field {
     width: 100%;
 }
+
+.button-cancel{
+    clear: both;
+    text-align: left;
+    margin-left: 2%;
+}

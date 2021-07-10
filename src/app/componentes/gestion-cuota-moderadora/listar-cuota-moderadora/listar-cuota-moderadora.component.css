@@ -1,5 +1,6 @@
 table {
     width: 100%;
+    text-align: left;
 }
 
 .center-icon{
@@ -10,4 +11,8 @@ table {
 
 th{
     width: 20%;
+}
+
+.boton{
+    text-align: left;
 }

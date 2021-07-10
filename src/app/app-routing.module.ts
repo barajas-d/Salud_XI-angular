@@ -16,8 +16,10 @@ import { ListarTiposCitaComponent } from './componentes/gestion-tipo-citas/lista
 import { CrearUsuariosComponent } from './componentes/gestion-usuarios/crear-usuarios/crear-usuarios.component';
 import { ListarUsuariosComponent } from './componentes/gestion-usuarios/listar-usuarios/listar-usuarios.component';
 import { LoginComponent } from './componentes/inicio-sesion/login/login.component';
+import { AdministradorComponent } from './componentes/layouts/administrador/administrador.component';
 
 const routes: Routes = [
+  {path: '', component: AdministradorComponent},
   {path: 'buscar-citas', component: BuscarCitasComponent},
   {path: 'listar-citas/:cedulaUsuario', component: ListarCitasComponent},
   {path: 'crear-citas', component: CrearCitasComponent},
@@ -33,6 +35,7 @@ const routes: Routes = [
   {path: 'crear-tipo-cita-especialidad', component: CrearTipoCitaEspecialidadComponent},
   {path: 'generar-agendas', component: GenerarAgendasComponent},
   {path: 'listar-agendas', component: ListarAgendaComponent},
+  {path: 'administrador', component: AdministradorComponent},
   {path: 'login', component: LoginComponent}
 ];
 

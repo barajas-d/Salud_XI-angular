@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 import { MedicoDto } from 'src/app/modeloDTO/medico-dto';
 import { ProxyMedicosService } from 'src/app/servicios/proxy-medicos.service';
 
@@ -19,7 +20,7 @@ export class ListarMedicosComponent implements OnInit {
 
   displayedColumns: string[] = ['nombre', 'cedula', 'especialidad', 'intensidadHoraria', "centroMedico", 'acciones'];
 
-  constructor(private servicioProxyMedico: ProxyMedicosService) { 
+  constructor(private servicioProxyMedico: ProxyMedicosService, private router: Router) { 
     this.getMedicos(0, this.pageSize);
   }
 
@@ -34,6 +35,10 @@ export class ListarMedicosComponent implements OnInit {
 
   changePage(pageEvent: PageEvent){
     this.getMedicos(pageEvent.pageIndex, pageEvent.pageSize);
+  }
+
+  navigateCrearMedico(){
+    this.router.navigate(['crear-medicos']);
   }
 
   ngOnInit(): void {

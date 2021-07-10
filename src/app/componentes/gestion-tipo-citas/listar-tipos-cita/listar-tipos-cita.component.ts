@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 import { TipoCitaDTO } from 'src/app/modeloDTO/tipo-cita-dto';
 import { ProxyTiposCitaService } from 'src/app/servicios/proxy-tipos-cita.service';
 
@@ -19,7 +20,7 @@ export class ListarTiposCitaComponent implements OnInit {
 
   displayedColumns: string[] = ['nombre', 'duracion', 'acciones'];
 
-  constructor(private servicioProxyTipoCita: ProxyTiposCitaService) { 
+  constructor(private servicioProxyTipoCita: ProxyTiposCitaService, private router: Router) { 
     this.getTiposCita(0, this.pageSize);
   }
 
@@ -34,6 +35,10 @@ export class ListarTiposCitaComponent implements OnInit {
 
   changePage(pageEvent: PageEvent){
     this.getTiposCita(pageEvent.pageIndex, pageEvent.pageSize);
+  }
+
+  navigateCrearTipoCita(){
+    this.router.navigate(['crear-tipo-cita']);
   }
 
   ngOnInit(): void {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 import { CuotaModeradoraDto } from 'src/app/modeloDTO/cuota-moderadora-dto';
 import { TipoCitaDTO } from 'src/app/modeloDTO/tipo-cita-dto';
 import { TipoContratoDto } from 'src/app/modeloDTO/tipo-contrato-dto';
@@ -22,7 +23,7 @@ export class ListarCuotaModeradoraComponent implements OnInit {
   
   displayedColumns: string[] = ['tipoCita', 'tiposContrato', 'valor', 'acciones'];
 
-  constructor(private servicioProxyCuotaModeradora: ProxyCuotaModeradoraService) { 
+  constructor(private servicioProxyCuotaModeradora: ProxyCuotaModeradoraService, private router: Router) { 
     this.getCuotasModeradoras(0, this.pageSize);
   }
 
@@ -37,6 +38,10 @@ export class ListarCuotaModeradoraComponent implements OnInit {
 
   changePage(pageEvent: PageEvent){
     this.getCuotasModeradoras(pageEvent.pageIndex, pageEvent.pageSize);
+  }
+
+  navigateCrearCuotaModeradora(){
+    this.router.navigate(['crear-cuotas-moderadoras']);
   }
 
   ngOnInit(): void {

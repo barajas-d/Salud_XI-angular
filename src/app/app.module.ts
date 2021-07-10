@@ -12,7 +12,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { LoginComponent } from './componentes/inicio-sesion/login/login.component';
 import { BuscarCitasComponent } from './componentes/gestion-citas-medicas/buscar-citas/buscar-citas.component';
 import { CrearUsuariosComponent } from './componentes/gestion-usuarios/crear-usuarios/crear-usuarios.component';
-import { GestionUsuariosComponent } from './componentes/gestion-usuarios/gestion-usuarios.component';
 import { ListarUsuariosComponent } from './componentes/gestion-usuarios/listar-usuarios/listar-usuarios.component';
 import { ListarCitasComponent } from './componentes/gestion-citas-medicas/listar-citas/listar-citas.component';
 import { CrearCitasComponent } from './componentes/gestion-citas-medicas/crear-citas/crear-citas.component';
@@ -40,12 +39,14 @@ import { ListarTipoCitaEspecialidadComponent } from './componentes/gestion-tipo-
 import { CrearTipoCitaEspecialidadComponent } from './componentes/gestion-tipo-cita-especialidad/crear-tipo-cita-especialidad/crear-tipo-cita-especialidad.component';
 import { ActualizarTipoCitaEspecialidadComponent } from './componentes/gestion-tipo-cita-especialidad/actualizar-tipo-cita-especialidad/actualizar-tipo-cita-especialidad.component';
 import { ListarAgendaComponent } from './componentes/gestion-agendas/listar-agenda/listar-agenda.component';
-import { ListarCitasPendientesComponent } from './componentes/gestion-citas-pendientes/listar-citas-pendientes/listar-citas-pendientes.component';
 import { GenerarAgendasComponent } from './componentes/gestion-agendas/generar-agendas/generar-agendas.component';
-import { ListarCitasSinAgendarComponent } from './componentes/gestion-agendas/listar-citas-sin-agendar/listar-citas-sin-agendar.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-
+import { AdministradorComponent } from './componentes/layouts/administrador/administrador.component';
+import { ListarCentrosMedicosComponent } from './componentes/gestion-centros-medicos/listar-centros-medicos/listar-centros-medicos.component';
+import { CrearCentrosMedicosComponent } from './componentes/gestion-centros-medicos/crear-centros-medicos/crear-centros-medicos.component';
+import { ActualizarCentrosMedicosComponent } from './componentes/gestion-centros-medicos/actualizar-centros-medicos/actualizar-centros-medicos.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     CrearCitasComponent,
     ListarUsuariosComponent,
     CrearUsuariosComponent,
-    GestionUsuariosComponent,
     ListarMedicosComponent,
     CrearMedicosComponent,
     CrearCuotaModeradoraComponent,
@@ -68,9 +68,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     CrearTipoCitaEspecialidadComponent,
     ActualizarTipoCitaEspecialidadComponent,
     ListarAgendaComponent,
-    ListarCitasPendientesComponent,
     GenerarAgendasComponent,
-    ListarCitasSinAgendarComponent
+    AdministradorComponent,
+    ListarCentrosMedicosComponent,
+    CrearCentrosMedicosComponent,
+    ActualizarCentrosMedicosComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +91,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

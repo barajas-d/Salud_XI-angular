@@ -1,0 +1,80 @@
+
+<div class="pantalla">
+  <div class="opciones">
+
+    <div class="titulo">
+      <h1>Funciones de administrador</h1>
+    </div>
+
+      <div class="tabla-component">
+
+        <table style="width:80%">
+          <tr>
+            <th>
+              <div class="tarjeta">
+                <h4>Gestion médicos</h4>
+                  <p>Ver, crear, actualizar y eliminar médicos del sistema</p>
+                  <button (click)="navigateListarMedicos()" mat-button color="primary">Mostrar</button>
+                </div>
+            </th>
+            <th>
+              <div class="tarjeta">
+                <h4>Gestion centros médicos</h4>
+                <p>Ver, crear, actualizar y eliminar centros médicos del sistema</p>
+                <button (click)="navigateListarCentrosMedicos()" mat-button color="primary">Mostrar</button>
+              </div>
+            </th>
+            <th>
+              <div class="tarjeta">
+                <h4>Gestion tipos de cita</h4>
+                <p>Ver, crear, actualizar y eliminar tipos de citas del sistema</p>
+                <button (click)="navigateListarTipoCita()" mat-button color="primary">Mostrar</button>
+              </div>
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <div class="tarjeta">
+                <h4>Gestion de usuarios</h4>
+                <p>Ver, crear, actualizar y eliminar usuarios del sistema</p>
+                <button (click)="navigateListarUsuarios()" mat-button color="primary">Mostrar</button>
+              </div>
+            </td>
+            <td>
+              <div class="tarjeta">
+                <h4>Parametrizar cuotas moderadoras</h4>
+                <p>Parametrizar el valor de un cuota moderadora</p>
+                <button (click)="navigateListarCuotasModeradoras()" mat-button color="primary">Mostrar</button>
+              </div>
+            </td>
+            <td>
+              <div class="tarjeta">
+                <h4>Parametrizar especialidades por tipo de cita</h4>
+                <p>Parametrizar especialidades medicas que pueden atender determinados tipos de citas medicas</p>
+                  <button (click)="navigateListarEspecialidadesTipoCita()" mat-button color="primary">Mostrar</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="tarjeta">
+                  <h4>Generar agendas</h4>
+                  <p>Ver citas pendientes por agendar y realizar porceso de asignacion de citas</p>
+                  <button (click)="navigateGenerarAgendas()" mat-button color="primary">Mostrar</button>
+                </div>
+              </td>
+              <td>
+                <div class="tarjeta">
+                  <h4>Consultar agendas por medico</h4>
+                  <p>Ver agenda diaria de un medico</p>
+                  <button (click)="navigateListarAgendas()" mat-button color="primary">Mostrar</button>
+                </div>
+              </td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    

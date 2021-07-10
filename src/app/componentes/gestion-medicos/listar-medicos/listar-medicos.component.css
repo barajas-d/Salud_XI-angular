@@ -8,6 +8,7 @@ table {
     text-align: center;
 }
 
-th{
-    width: 20%;
+table{
+    width: 100%;
+    text-align: left;
 }

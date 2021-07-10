@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TipoContratoDto } from 'src/app/modeloDTO/tipo-contrato-dto';
 import { UbicacionDto } from 'src/app/modeloDTO/ubicacion-dto';
 import { UsuarioDto } from 'src/app/modeloDTO/usuario-dto';
@@ -29,7 +30,7 @@ export class CrearUsuariosComponent implements OnInit {
   //formGroup para validar campos del formulario
   formGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private servicioProxyUsuarios: ProxyUsuariosService) { 
+  constructor(private formBuilder: FormBuilder, private servicioProxyUsuarios: ProxyUsuariosService, private router: Router) { 
 
     //Obciones de formulario
     this.getAllUbicaciones();
@@ -60,7 +61,7 @@ export class CrearUsuariosComponent implements OnInit {
     let nuevoUsuario = new UsuarioDto(this.nombre, this.cedula, this.correo, this.tipoContratoSeleccionado, this.ubicacionSeleccionada);
     this.servicioProxyUsuarios.addUsuario(nuevoUsuario).subscribe(
       result => {
-        console.log('result: ' + result.id);
+        this.navigateListarUsuario();
       }
     );
   }
@@ -79,6 +80,10 @@ export class CrearUsuariosComponent implements OnInit {
         this.listaTiposContrato = result;
       }
     );
+  }
+
+  navigateListarUsuario(){
+    this.router.navigate(['listar-usuarios']);
   }
 
   ngOnInit(): void {

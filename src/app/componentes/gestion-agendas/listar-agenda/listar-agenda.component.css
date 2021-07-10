@@ -16,3 +16,26 @@ th{
     clear: both;
     text-align: left;
 }
+
+.left-form{
+    float: left;
+    width: 40vh;
+    padding-right: 10vh;
+}
+
+.right-form{
+    float: left;
+    width: 40vh;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+table{
+    text-align: left;
+}
+
+.tabla{
+    max-height: 50%;
+}

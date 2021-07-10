@@ -1,20 +1,14 @@
-table {
-    width: 100%;
-}
-
 .center-icon{
     justify-content: center;
     align-items: center;
     text-align: center;
 }
 
-th{
-    width: 20%;
+table{
+    width: 100%;
+    text-align: left;
 }
 
-.example-table-container {
-    position: relative;
-    min-height: 200px;
-    max-height: 400px;
-    overflow: auto;
+.boton{
+    text-align: left;
 }

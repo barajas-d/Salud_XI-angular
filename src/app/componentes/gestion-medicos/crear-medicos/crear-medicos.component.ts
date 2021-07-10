@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CentroMedicoDto } from 'src/app/modeloDTO/centro-medico-dto';
 import { EspecialidadDto } from 'src/app/modeloDTO/especialidad-dto';
 import { MedicoDto } from 'src/app/modeloDTO/medico-dto';
@@ -29,7 +30,7 @@ export class CrearMedicosComponent implements OnInit {
   //formGroup para validar campos del formulario
   formGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private servicioProxyMedicos: ProxyMedicosService) { 
+  constructor(private formBuilder: FormBuilder, private servicioProxyMedicos: ProxyMedicosService, private router: Router) { 
 
     //Obciones de formulario
     this.getAllEspecialidades();
@@ -61,6 +62,7 @@ export class CrearMedicosComponent implements OnInit {
     this.servicioProxyMedicos.addMedico(nuevoMedico).subscribe(
       result => {
         console.log('result: ' + result.id);
+        this.navigateListarMedicos();
       }
     );
   }
@@ -79,6 +81,10 @@ export class CrearMedicosComponent implements OnInit {
         this.listaCentrosMedicos = result;
       }
     );
+  }
+
+  navigateListarMedicos(){
+    this.router.navigate(['listar-medicos']);
   }
 
   ngOnInit(): void {

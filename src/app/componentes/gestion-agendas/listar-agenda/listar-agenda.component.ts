@@ -37,6 +37,9 @@ export class ListarAgendaComponent implements OnInit {
 
     //Validaciones del formulario
     this.formGroup = this.formBuilder.group({
+      fecha: new FormControl('', [
+        Validators.required
+      ]),
       cedula: new FormControl('', [
         Validators.required,
         Validators.pattern(this.regexNumericos)
@@ -50,6 +53,12 @@ export class ListarAgendaComponent implements OnInit {
       result => {
         this.listaCitas = result;
         this.formatDate();
+        if(result == null){
+          console.log('usuario no encontrado')
+        }
+        else if(this.listaCitas.length == 0){
+          console.log('el médico no tiene citas agendadas a este dia')
+        }
       }
     );
   }

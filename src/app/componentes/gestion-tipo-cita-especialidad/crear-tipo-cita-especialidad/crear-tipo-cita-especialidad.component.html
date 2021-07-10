@@ -1,31 +1,42 @@
-<form [formGroup]="formGroup" (ngSubmit)="addTipoCitaEspecialidad()" >
-
-    <div class="left-form">
-        <h4>Especialidad</h4>
-        <mat-form-field appearance="fill">
-        <mat-label>Especialidad</mat-label>
-        <mat-select [(ngModel)]="especialidadSeleccionada" formControlName="especialidad">
-            <mat-option *ngFor="let especialidad of listaEspecialidades" [value]="especialidad.id">
-            {{especialidad.nombre}}
-            </mat-option>
-        </mat-select>
-        </mat-form-field>
+<div class="fondo-pantalla">
+  <div class="centrar-contenido">
+    <div class="titulo">
+      <h1>Parametrizar tipo de cita atendido por especialidad</h1>
     </div>
 
-    <div class="right-form">
-        <h4>Tipo de cita</h4>
-        <mat-form-field appearance="fill">
-        <mat-label>Tipo de cita</mat-label>
-        <mat-select [(ngModel)]="tipoCitaSeleccionado" formControlName="tipoCita">
-          <mat-option *ngFor="let tipoCita of listaTiposCita" [value]="tipoCita.id">
-            {{tipoCita.nombre}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+    <div class="formulario">
+      <form [formGroup]="formGroup" (ngSubmit)="addTipoCitaEspecialidad()" >
+        <div class="left-form">
+            <h4>Especialidad</h4>
+            <mat-form-field appearance="fill">
+            <mat-label>Especialidad</mat-label>
+            <mat-select [(ngModel)]="especialidadSeleccionada" formControlName="especialidad">
+                <mat-option *ngFor="let especialidad of listaEspecialidades" [value]="especialidad.id">
+                {{especialidad.nombre}}
+                </mat-option>
+            </mat-select>
+            </mat-form-field>
+        </div>
+    
+        <div class="right-form">
+            <h4>Tipo de cita</h4>
+            <mat-form-field appearance="fill">
+            <mat-label>Tipo de cita</mat-label>
+            <mat-select [(ngModel)]="tipoCitaSeleccionado" formControlName="tipoCita">
+              <mat-option *ngFor="let tipoCita of listaTiposCita" [value]="tipoCita.id">
+                {{tipoCita.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+    
+        <div class="button">  
+            <button class="button-success" type="submit" class="button" mat-raised-button color="accent" [disabled]="formGroup.invalid">Crear Parametro</button>
+            <button type="button" (click)="navigateListarTipoCitaEspecialidad()"  class="button-cancel" mat-raised-button color="warn">Cancelar</button>  
+        </div>
+    </form>
+
     </div>
 
-    <div class="button">  
-        <button class="button-success" type="submit" class="button" mat-raised-button color="accent" [disabled]="formGroup.invalid">Crear Parametro</button>
-    </div>
-
-</form>
+  </div>
+</div>

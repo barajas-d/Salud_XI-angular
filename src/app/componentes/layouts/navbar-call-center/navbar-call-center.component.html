@@ -1,15 +1,29 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
+
+    <button mat-icon-button class="logo-image">
+        <img class="image" src="./assets/imagenes/LogoTextoLateral.png">
     </button>
-    <span>My App</span>
+
+    <button mat-button>Inició</button>
+
+    <button mat-button [matMenuTriggerFor]="aboveMenu">Configuración
+        <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #aboveMenu="matMenu" yPosition="above">
+      <button mat-menu-item>Getión médicos</button>
+      <button mat-menu-item>Gestión centros médicos</button>
+      <button mat-menu-item>Getión tipos de cita</button>
+      <button mat-menu-item>Gestión usuarios</button>
+      <button mat-menu-item>Getión cuotas moderadoras</button>
+      <button mat-menu-item>Gestión tipos de cita por especialidad</button>
+    </mat-menu>
+
+    <button mat-button>Consultar agendas</button>
+
+    <button mat-button>Generar agendas</button>
+
 
     <span class="example-spacer"></span>
 
-    <button mat-icon-button favorite-icon aria-label="Example icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button aria-label="Example icon-button with share icon">
-        <mat-icon>share</mat-icon>
-    </button>
+    <button mat-stroked-button>Cerrar sesión</button>
 </mat-toolbar>

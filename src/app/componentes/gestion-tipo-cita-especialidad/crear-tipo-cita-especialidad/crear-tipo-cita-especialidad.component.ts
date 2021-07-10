@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { EspecialidadDto } from 'src/app/modeloDTO/especialidad-dto';
 import { TipoCitaDTO } from 'src/app/modeloDTO/tipo-cita-dto';
 import { TipoCitaEspecialidadDto } from 'src/app/modeloDTO/tipo-cita-especialidad-dto';
@@ -23,7 +24,7 @@ export class CrearTipoCitaEspecialidadComponent implements OnInit {
   //formGroup para validar campos del formulario
   formGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private servicioProxyTipoCitaEspecialidad: ProxyTipoCitaEspecialidadService) { 
+  constructor(private formBuilder: FormBuilder, private servicioProxyTipoCitaEspecialidad: ProxyTipoCitaEspecialidadService, private router: Router) { 
     
     //Obciones de formulario
     this.getAllEspecialidades();
@@ -46,6 +47,7 @@ export class CrearTipoCitaEspecialidadComponent implements OnInit {
     this.servicioProxyTipoCitaEspecialidad.addTipoCitaEspecialidad(nuevoTipoCitaEspecialidad).subscribe(
       result => {
         console.log('result: ' + result.id);
+        this.navigateListarTipoCitaEspecialidad();
       }
     );
   }
@@ -64,6 +66,10 @@ export class CrearTipoCitaEspecialidadComponent implements OnInit {
         this.listaTiposCita = result;
       }
     );
+  }
+
+  navigateListarTipoCitaEspecialidad(){
+    this.router.navigate(['listar-tipo-cita-especialidad']);
   }
 
   ngOnInit(): void {
