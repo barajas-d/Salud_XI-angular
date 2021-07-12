@@ -20,7 +20,7 @@ export class ListarCitasComponent implements OnInit {
   displayedColumns: string[] = ['fecha', 'tipoCita', 'usuario', 'sintomatologia'];
 
   constructor(private router: Router, private rutaActiva: ActivatedRoute, private servicioProxyCitas: ProxyCitasService) { 
-    //Parametros pasados en la ruta
+    //Parametros pasados en la ruta - cedula del usuario
     this.cedulaUsuario = this.rutaActiva.snapshot.params.cedulaUsuario;
     
     this.getCitasByCCUser();

@@ -4,23 +4,23 @@
         <img class="image" src="./assets/imagenes/LogoTextoLateral.png">
     </button>
 
-    <button mat-button>Inició</button>
+    <button mat-button (click)="navigateInicio()">Inició</button>
 
     <button mat-button [matMenuTriggerFor]="aboveMenu">Configuración
         <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <mat-menu #aboveMenu="matMenu" yPosition="above">
-      <button mat-menu-item>Getión médicos</button>
-      <button mat-menu-item>Gestión centros médicos</button>
-      <button mat-menu-item>Getión tipos de cita</button>
-      <button mat-menu-item>Gestión usuarios</button>
-      <button mat-menu-item>Getión cuotas moderadoras</button>
-      <button mat-menu-item>Gestión tipos de cita por especialidad</button>
+      <button mat-menu-item (click)="navigateListarMedicos()">Getión médicos</button>
+      <button mat-menu-item (click)="navigateListarCentrosMedicos()">Gestión centros médicos</button>
+      <button mat-menu-item (click)="navigateListarTipoCita()">Getión tipos de cita</button>
+      <button mat-menu-item (click)="navigateListarUsuarios()">Gestión usuarios</button>
+      <button mat-menu-item (click)="navigateListarCuotasModeradoras()">Getión cuotas moderadoras</button>
+      <button mat-menu-item (click)="navigateListarEspecialidadesTipoCita()">Gestión tipos de cita por especialidad</button>
     </mat-menu>
 
-    <button mat-button>Consultar agendas</button>
+    <button mat-button (click)="navigateListarAgendas()">Consultar agendas</button>
 
-    <button mat-button>Generar agendas</button>
+    <button mat-button (click)="navigateGenerarAgendas()">Generar agendas</button>
 
 
     <span class="example-spacer"></span>

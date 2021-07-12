@@ -39,3 +39,7 @@ table{
 .tabla{
     max-height: 50%;
 }
+
+td{
+    text-align: left;
+}

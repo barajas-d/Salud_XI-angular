@@ -7,6 +7,7 @@ import { CrearCitasComponent } from './componentes/gestion-citas-medicas/crear-c
 import { ListarCitasComponent } from './componentes/gestion-citas-medicas/listar-citas/listar-citas.component';
 import { CrearCuotaModeradoraComponent } from './componentes/gestion-cuota-moderadora/crear-cuota-moderadora/crear-cuota-moderadora.component';
 import { ListarCuotaModeradoraComponent } from './componentes/gestion-cuota-moderadora/listar-cuota-moderadora/listar-cuota-moderadora.component';
+import { ActualizarMedicosComponent } from './componentes/gestion-medicos/actualizar-medicos/actualizar-medicos.component';
 import { CrearMedicosComponent } from './componentes/gestion-medicos/crear-medicos/crear-medicos.component';
 import { ListarMedicosComponent } from './componentes/gestion-medicos/listar-medicos/listar-medicos.component';
 import { CrearTipoCitaEspecialidadComponent } from './componentes/gestion-tipo-cita-especialidad/crear-tipo-cita-especialidad/crear-tipo-cita-especialidad.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'listar-usuarios', component: ListarUsuariosComponent},
   {path: 'crear-usuarios', component: CrearUsuariosComponent},
   {path: 'listar-medicos', component: ListarMedicosComponent},
+  {path: 'actualizar-medicos/:cedulaMedico', component: ActualizarMedicosComponent},
   {path: 'crear-medicos', component: CrearMedicosComponent},
   {path: 'listar-tipo-cita', component: ListarTiposCitaComponent},
   {path: 'crear-tipo-cita', component: CrearTiposCitaComponent},

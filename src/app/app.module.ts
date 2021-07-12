@@ -47,6 +47,10 @@ import { ListarCentrosMedicosComponent } from './componentes/gestion-centros-med
 import { CrearCentrosMedicosComponent } from './componentes/gestion-centros-medicos/crear-centros-medicos/crear-centros-medicos.component';
 import { ActualizarCentrosMedicosComponent } from './componentes/gestion-centros-medicos/actualizar-centros-medicos/actualizar-centros-medicos.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogDeleteComponent } from './componentes/layouts/dialog-delete/dialog-delete.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { ActualizarMedicosComponent } from './componentes/gestion-medicos/actualizar-medicos/actualizar-medicos.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +76,9 @@ import { MatMenuModule } from '@angular/material/menu';
     AdministradorComponent,
     ListarCentrosMedicosComponent,
     CrearCentrosMedicosComponent,
-    ActualizarCentrosMedicosComponent
+    ActualizarCentrosMedicosComponent,
+    DialogDeleteComponent,
+    ActualizarMedicosComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +98,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

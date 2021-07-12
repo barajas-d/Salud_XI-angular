@@ -38,6 +38,11 @@ export class ProxyMedicosService {
     return this.httpClient.get<MedicoDto[]>(this.UrlBase + '/' + inicial + '/' + cantidad);
   }
 
+  //Obtener medico por numero de cedula
+  getMedico(cedulaMedico: Number){
+    return this.httpClient.get<MedicoDto>(this.UrlBase + '/' + cedulaMedico);
+  }
+
   //Obtener todas las especialidades para el formulario
   getAllEspecialidades(){
     return this.httpClient.get<EspecialidadDto[]>(this.UrlBase + '/especialidades')
