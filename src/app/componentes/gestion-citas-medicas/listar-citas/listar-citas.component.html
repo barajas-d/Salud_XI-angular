@@ -1,11 +1,16 @@
-<div class="uno" >
-    <div class="dos">
+<app-navbar-administrador></app-navbar-administrador>
+<div class="fondo-pantalla">
+    <div class="centrar-contenido">
         <div class="titulo">
-            <h1>Gestion Usuarios</h1>
+            <h1>Citas medicas del usuario</h1>
         </div>
         
         <div>
-            <app-crear-citas [cedulaUsuario]="cedulaUsuario" ></app-crear-citas>
+            <app-crear-citas [cedulaUsuario]="cedulaUsuario" (actualizar)="actualizarCitas($event)"></app-crear-citas>
+        </div>
+
+        <div *ngIf="usuarioCargado">
+            <h3 style="text-align: left;">Usuario {{usuario.nombre}}, Tipo de contrato: {{usuario.tipoContrato.nombre}}</h3>
         </div>
 
         <div class="tabla">
@@ -14,31 +19,60 @@
                 <!-- Columna fecha -->
                 <ng-container matColumnDef="fecha">
                 <th mat-header-cell *matHeaderCellDef> Fecha </th>
-                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-                </ng-container>
-            
-                <!-- Columna tipo cita -->
-                <ng-container matColumnDef="tipoCita">
-                <th mat-header-cell *matHeaderCellDef> Tipo de cita </th>
-                <td mat-cell *matCellDef="let element"> {{element.asignada}} </td>
-                </ng-container>
-            
-                <!-- Columna usuario -->
-                <ng-container matColumnDef="usuario">
-                <th mat-header-cell *matHeaderCellDef> Usuario </th>
-                <td mat-cell *matCellDef="let element"> {{element.usuario}} </td>
+                <td mat-cell *matCellDef="let element"> {{getFecha(element.fecha)}}</td>
                 </ng-container>
             
                 <!-- Columna sintomatologia -->
                 <ng-container matColumnDef="sintomatologia">
                 <th mat-header-cell *matHeaderCellDef> Sintomatologia </th>
-                <td mat-cell *matCellDef="let element"> {{element.sintomatologia}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.sintomatologia.detalle}} </td>
+                </ng-container>
+
+                <!-- Columna tipo cita -->
+                <ng-container matColumnDef="tipoCita">
+                <th mat-header-cell *matHeaderCellDef> Tipo de cita </th>
+                <td mat-cell *matCellDef="let element"> {{element.tipoCita.nombre}} </td>
                 </ng-container>
             
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <!-- Columna médico -->
+                <ng-container matColumnDef="medico">
+                <th mat-header-cell *matHeaderCellDef> Medico </th>
+                <td mat-cell *matCellDef="let element"> {{getMedicoNombre(element)}} </td>
+                </ng-container>
+            
+                <!-- Columna centro médico -->
+                <ng-container matColumnDef="centroMedico">
+                <th mat-header-cell *matHeaderCellDef> Centro Medico </th>
+                <td mat-cell *matCellDef="let element"> {{getCentroMedico(element)}} </td>
+                </ng-container>
+
+                <!-- Columna Cuota moderadora -->
+                <ng-container matColumnDef="cuotaModeradora">
+                <th mat-header-cell *matHeaderCellDef> Cuota Moderadora </th>
+                <td mat-cell *matCellDef="let element"> {{getValorCuotaModeradora(element.tipoCita.id, element.usuario.tipoContrato.id)}} </td>
+                </ng-container>
+
+                <!-- Columna acciones -->
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button color="warn" (click)="openDeleteDialog(element.id)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
         </div>
+
+        <mat-paginator  [length]="length"
+                        [pageSize]="pageSize"
+                        [pageSizeOptions]="pageSizeOptions"
+                        (page)="changePage($event)">
+        </mat-paginator>
+
     </div>
     
 </div>

@@ -1,6 +1,7 @@
 .left-form{
     float: left;
     width: 40vh;
+    padding-right: 10vh;
 }
 
 .right-form{
@@ -13,12 +14,12 @@
     text-align: left;
 }
 
-mat-form-field {
-    width: 100%;
-}
-
 .button-cancel{
     clear: both;
     text-align: left;
     margin-left: 2%;
+}
+
+mat-form-field {
+    width: 100%;
 }

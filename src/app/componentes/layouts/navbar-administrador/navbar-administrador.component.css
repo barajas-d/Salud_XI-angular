@@ -1,0 +1,16 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+mat-toolbar{
+    position: fixed;
+}
+
+.image{
+    display: flex;
+    height: 100%;
+}
+
+.logo-image{
+    width: auto;
+}

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { InicioSesionDTO } from 'src/app/modeloDTO/inicio-sesion-dto';
+import { UsuarioDto } from 'src/app/modeloDTO/usuario-dto';
+import { InicioSesionService } from 'src/app/servicios/inicio-sesion.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +11,14 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  //Datos obtenidos
+  correo: String;
+  contrasena: String;
+
   formGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { 
+  constructor(private router: Router, private servicioInicioSesion: InicioSesionService, private formBuilder: FormBuilder) { 
 
     //Validaciones del formulario
     this.formGroup = this.formBuilder.group({
@@ -27,7 +36,16 @@ export class LoginComponent implements OnInit {
   }
 
   ingresar() {
-    console.log(this.formGroup);
-    
+    let result = this.servicioInicioSesion.getTypeUser(this.correo, this.contrasena);
+    console.log(result);
+    if(result == "administrador"){
+      this.router.navigate(['administrador']);
+    }
+    else if(result == "call-center"){
+      this.router.navigate(['buscar-citas']);
+    }
+    else{
+      console.log("usuario no encontrado")
+    }
   }
 }

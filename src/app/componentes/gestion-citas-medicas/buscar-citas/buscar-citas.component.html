@@ -1,11 +1,26 @@
-<div class="pantalla">
-    <br>
-    <div class="contenedor">
+<app-navbar-administrador></app-navbar-administrador>
+<div class="fondo-pantalla">
+    <div class="centrar-contenido">
 
-        <div class="centrar">
-            <form [formGroup] = "formGroup" (ngSubmit)="navigateListarCitas()">
-                
-                <mat-form-field class="input" appearance="fill">
+        <div class="titulo">
+            <h1>Buscar usuario - Call center</h1>
+        </div>
+        
+        <div>
+            <img src="./assets/imagenes/LogoTextoSuperior.png">
+        </div>
+
+        <div>
+            <h4>Sistema de agendamiento de citas médicas, digite la cedula del usuario para crear citas</h4>
+        </div>
+
+        <br>
+        <div class="contenedor">
+            
+            <div class="centrar">
+                <form [formGroup] = "formGroup" (ngSubmit)="navigateListarCitas()">
+                    
+                    <mat-form-field class="input" appearance="fill">
                     <mat-label>Cedula usuario</mat-label>
                     <input matInput [(ngModel)]="cedulaUsuario" type="text" name="cedulaUsuario" formControlName="cedulaUsuario" autocapitalize="off" placeholder="Cedula usuario"> 
                     <!--validaciones input cedula usuario-->
@@ -13,10 +28,11 @@
                     <mat-error *ngIf="formGroup.controls.cedulaUsuario.hasError('pattern')">Valor no numérico</mat-error>
                 </mat-form-field>
                 
+                
+                    <button type="submit" class="button" mat-raised-button color="primary" [disabled]="formGroup.invalid">Buscar usuario</button> 
+                </form>
+            </div>
 
-                <button type="submit" class="button" mat-raised-button color="primary" [disabled]="formGroup.invalid">Buscar usuario</button> 
-            </form>
         </div>
-
     </div>
 </div>

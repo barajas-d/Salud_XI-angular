@@ -37,7 +37,6 @@ export class BuscarCitasComponent implements OnInit {
   }
   
   navigateListarCitas(){
-    console.log('FUIMONOS: ' + 'listar-citas/' + this.cedulaUsuario)
     this.router.navigate(['listar-citas/' + this.cedulaUsuario]);
   }
 

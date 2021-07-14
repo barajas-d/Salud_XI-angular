@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CitaDTO } from 'src/app/modeloDTO/cita-dto';
 import { SintomatologiaDTO } from 'src/app/modeloDTO/sintomatologia-dto';
@@ -12,7 +12,9 @@ import { ProxyTiposCitaService } from 'src/app/servicios/proxy-tipos-cita.servic
   styleUrls: ['./crear-citas.component.css']
 })
 export class CrearCitasComponent implements OnInit {
-  
+
+  @Output() actualizar = new EventEmitter<Boolean>();
+
   //Datos para crear los formularios
   @Input() cedulaUsuario: Number;
   listaTiposCita: TipoCitaDTO[] = [];
@@ -46,6 +48,7 @@ export class CrearCitasComponent implements OnInit {
     this.servicioProxyCitas.addCita(new CitaDTO(this.tipoCitaSeleccionada, this.cedulaUsuario, this.sintomatologiaSeleccionada)).subscribe( //Cambiar por el id del usuario
       result => {
         console.log('result: ' + result.id);
+        this.actualizar.emit(true);
       }
     );
   }

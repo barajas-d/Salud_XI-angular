@@ -1,0 +1,53 @@
+.left-form{
+    float: left;
+    width: 40vh;
+    padding-right: 10vh;
+}
+
+.right-form{
+    float: left;
+    width: 40vh;
+}
+
+.button{
+    clear: both;
+    text-align: left;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.button-cancel{
+    clear: both;
+    text-align: left;
+    margin-left: 2%;
+}
+
+table {
+    width: 100%;
+}
+
+.center-icon{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+table{
+    width: 100%;
+    text-align: left;
+}
+
+.ubicacion-selector{
+    text-align: left;
+}
+
+.ubicacion-selector-container{
+    float: left;
+    width: 25%;
+}
+
+.ubicacion-button{
+    float: left;
+}

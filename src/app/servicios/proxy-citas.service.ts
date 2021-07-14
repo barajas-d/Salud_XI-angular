@@ -22,13 +22,13 @@ export class ProxyCitasService {
 
   //Eliminar una cita no agendada
   deleteCita(idCita: Number){
-    return this.httpClient.delete(this.UrlBase + '/delete/' + idCita);
+    return this.httpClient.delete<Boolean>(this.UrlBase + '/delete/' + idCita);
   }
 
   //Obtener las citas medicas de un usuario por medio de la cedula
-  getCitasByCCUser(cedulaUsuario: Number){
+  getCitasByCCUser(cedulaUsuario: Number, page: Number, size: Number){
     console.log('get: ', this.UrlBase + '/' + cedulaUsuario)
-    return this.httpClient.get<CitaDTO[]>(this.UrlBase + '/' + cedulaUsuario);
+    return this.httpClient.get<CitaDTO[]>(this.UrlBase + '/' + cedulaUsuario + '/' + page + '/' + size);
   }
 
   //Obtener las sintomatologias para la creacion de nuevas citas

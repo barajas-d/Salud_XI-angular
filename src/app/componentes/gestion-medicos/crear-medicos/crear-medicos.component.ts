@@ -61,7 +61,6 @@ export class CrearMedicosComponent implements OnInit {
     let nuevoMedico = new MedicoDto(this.nombre, this.cedula, this.intensidadHorariaSeleccionada, this.centroMedicoSeleccionado, this.especialidadSeleccionada);
     this.servicioProxyMedicos.addMedico(nuevoMedico).subscribe(
       result => {
-        console.log('result: ' + result.id);
         this.navigateListarMedicos();
       }
     );

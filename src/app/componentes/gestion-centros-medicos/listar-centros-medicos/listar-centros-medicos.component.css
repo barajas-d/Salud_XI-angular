@@ -1,0 +1,14 @@
+table {
+    width: 100%;
+}
+
+.center-icon{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+table{
+    width: 100%;
+    text-align: left;
+}

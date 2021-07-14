@@ -2,16 +2,16 @@
 <div class="fondo-pantalla">
     <div class="centrar-contenido">
         <div class="titulo">
-            <h1>Crear tipo de cita</h1>
+            <h1>Actualizar tipo de cita</h1>
         </div>
 
-        <div class="formulario">
-            <form [formGroup]="formGroup" (ngSubmit)="addTipoCita()" >
+        <div class="formulario" *ngIf="tipoCitaCargado">
+            <form [formGroup]="formGroup" (ngSubmit)="updateTipoCita()" >
                 <div class="left-form">
                     <h4>Nombre</h4>
                     <mat-form-field class="input" appearance="fill">
                         <mat-label>Nombre</mat-label>
-                        <input matInput [(ngModel)]="nombre" type="text" name="Nombre" formControlName="nombre" autocomplete="off">
+                        <input matInput [(ngModel)]="tipoCita.nombre" type="text" name="Nombre" formControlName="nombre" autocomplete="off">
                         <!--validaciones campo nombre-->
                         <mat-error *ngIf="formGroup.controls.nombre.hasError('required')">Nombre requerido</mat-error>
                     </mat-form-field>
@@ -21,7 +21,7 @@
                     <h4>Duración en minutos</h4>
                     <mat-form-field class="input" appearance="fill">
                         <mat-label>Duración en minutos</mat-label>
-                        <input matInput [(ngModel)]="duracion" type="text"name="duracion" formControlName="duracion" autocomplete="off">
+                        <input matInput [(ngModel)]="tipoCita.duracion" type="text"name="duracion" formControlName="duracion" autocomplete="off">
                         <!--validaciones campo duración-->
                         <mat-error *ngIf="formGroup.controls.duracion.hasError('required')">Cedula requerida</mat-error>
                         <mat-error *ngIf="formGroup.controls.duracion.hasError('pattern')">Solo valores numericos</mat-error>
@@ -31,7 +31,7 @@
                 </div>
             
                 <div class="button">  
-                    <button class="button-success" type="submit" class="button" mat-raised-button color="accent" [disabled]="formGroup.invalid">Crear tipo de cita</button>
+                    <button class="button-success" type="submit" class="button" mat-raised-button color="accent" [disabled]="formGroup.invalid">Actualizar tipo de cita</button>
                     <button type="button" (click)="navigateListarTipoCita()"  class="button-cancel" mat-raised-button color="warn">Cancelar</button>
                 </div>
             </form>

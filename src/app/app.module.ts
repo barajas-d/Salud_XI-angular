@@ -37,7 +37,6 @@ import { ListarTiposCitaComponent } from './componentes/gestion-tipo-citas/lista
 import { CrearTiposCitaComponent } from './componentes/gestion-tipo-citas/crear-tipos-cita/crear-tipos-cita.component';
 import { ListarTipoCitaEspecialidadComponent } from './componentes/gestion-tipo-cita-especialidad/listar-tipo-cita-especialidad/listar-tipo-cita-especialidad.component';
 import { CrearTipoCitaEspecialidadComponent } from './componentes/gestion-tipo-cita-especialidad/crear-tipo-cita-especialidad/crear-tipo-cita-especialidad.component';
-import { ActualizarTipoCitaEspecialidadComponent } from './componentes/gestion-tipo-cita-especialidad/actualizar-tipo-cita-especialidad/actualizar-tipo-cita-especialidad.component';
 import { ListarAgendaComponent } from './componentes/gestion-agendas/listar-agenda/listar-agenda.component';
 import { GenerarAgendasComponent } from './componentes/gestion-agendas/generar-agendas/generar-agendas.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -51,6 +50,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogDeleteComponent } from './componentes/layouts/dialog-delete/dialog-delete.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { ActualizarMedicosComponent } from './componentes/gestion-medicos/actualizar-medicos/actualizar-medicos.component';
+import { ActualizarUsuariosComponent } from './componentes/gestion-usuarios/actualizar-usuarios/actualizar-usuarios.component';
+import { ActualizarTipoCitasComponent } from './componentes/gestion-tipo-citas/actualizar-tipo-citas/actualizar-tipo-citas.component';
+import { NavbarAdministradorComponent } from './componentes/layouts/navbar-administrador/navbar-administrador.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,6 @@ import { ActualizarMedicosComponent } from './componentes/gestion-medicos/actual
     CrearTiposCitaComponent,
     ListarTipoCitaEspecialidadComponent,
     CrearTipoCitaEspecialidadComponent,
-    ActualizarTipoCitaEspecialidadComponent,
     ListarAgendaComponent,
     GenerarAgendasComponent,
     AdministradorComponent,
@@ -78,7 +79,10 @@ import { ActualizarMedicosComponent } from './componentes/gestion-medicos/actual
     CrearCentrosMedicosComponent,
     ActualizarCentrosMedicosComponent,
     DialogDeleteComponent,
-    ActualizarMedicosComponent
+    ActualizarMedicosComponent,
+    ActualizarUsuariosComponent,
+    ActualizarTipoCitasComponent,
+    NavbarAdministradorComponent
   ],
   imports: [
     BrowserModule,

@@ -29,7 +29,7 @@ export class ProxyCuotaModeradoraService {
   }
 
   //Eliminar una cuota moderadora
-  deleteUsuario(idCuotaModeradora: Number){
+  deleteCuotaModeradora(idCuotaModeradora: Number){
     return this.httpClient.delete(this.UrlBase + '/delete/' + idCuotaModeradora);
   }
 

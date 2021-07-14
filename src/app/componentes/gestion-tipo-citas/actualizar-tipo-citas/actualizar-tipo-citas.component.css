@@ -1,6 +1,7 @@
 .left-form{
     float: left;
     width: 40vh;
+    padding-right: 10vh;
 }
 
 .right-form{

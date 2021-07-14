@@ -10,36 +10,8 @@
     text-align: center;
 }
 
-table {
-    width: 100vh
-}
-
-
-.uno{
-    display: flex;
-    justify-content: center;
-    background-color: blueviolet;
-    height: 100vh;
-}
-
-.dos{
-    display: flexbox;
-    text-align: center;
-    background-color: burlywood;
-    height: 100vh;
-    width: 75%;
-}
-
-.titulo{
-    margin-top: 15vh;
-    background-color: skyblue;
-}
-
 .tabla{
-    display: flex;
-    width: 100%;
-    height: 60%;
-    background-color: tomato;
+    max-height: 50%;
 }
 
 table{

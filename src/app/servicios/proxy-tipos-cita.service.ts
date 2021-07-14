@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { TipoCitaDTO } from '../modeloDTO/tipo-cita-dto';
+import { TipoContratoDto } from '../modeloDTO/tipo-contrato-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -38,8 +39,13 @@ export class ProxyTiposCitaService {
 
   //Obtener todos los tipos de cita
   getAllTiposCita(){
-    console.log('get: ', this.UrlBase)
-    return this.httpClient.get<TipoCitaDTO[]>(this.UrlBase)
+    console.log('get: ', this.UrlBase);
+    return this.httpClient.get<TipoCitaDTO[]>(this.UrlBase);
+  }
+
+  //Obtener tipo de cita por id
+  getTipoCitaById(idTipoCita: Number){
+    return this.httpClient.get<TipoCitaDTO>(this.UrlBase + '/' + idTipoCita);
   }
 
 }

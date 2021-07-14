@@ -43,6 +43,11 @@ export class ProxyUsuariosService {
     return this.httpClient.get<UsuarioDto>(this.UrlBase + '/' + idUsuario);
   }
 
+  //Obtener usuario por cedula
+  getUsuarioByCC(cedulaUsuario: Number){
+    return this.httpClient.get<UsuarioDto>(this.UrlBase + '/cedula/' + cedulaUsuario);
+  }
+
   //Obtener ubicaciones
   getAllubicaciones(){
     return this.httpClient.get<UbicacionDto[]>(this.UrlBase + '/ubicaciones');

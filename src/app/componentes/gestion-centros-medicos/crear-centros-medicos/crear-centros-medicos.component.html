@@ -1,1 +1,29 @@
-<p>crear-centros-medicos works!</p>
+<app-navbar-call-center></app-navbar-call-center>
+<div class="fondo-pantalla">
+    <div class="centrar-contenido">
+        <div class="titulo">
+            <h1>Crear centro médico</h1>
+        </div>
+
+        <div class="formulario">
+            <form [formGroup]="formGroup" (ngSubmit)="addCentroMedico()" >
+                <div class="left-form">
+                    <h4>Nombre</h4>
+                    <mat-form-field class="input" appearance="fill">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput [(ngModel)]="nombre" type="text" name="Nombre" formControlName="nombre" autocomplete="off">
+                        <!--validaciones campo nombre-->
+                        <mat-error *ngIf="formGroup.controls.nombre.hasError('required')">Nombre requerido</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="button">  
+                    <button class="button-success" type="submit" class="button" mat-raised-button color="accent" [disabled]="formGroup.invalid">Crear centro médico</button>
+                    <button type="button" (click)="navigateListarCentrosMedicos()"  class="button-cancel" mat-raised-button color="warn">Cancelar</button>
+                </div>
+            
+            </form>
+        </div>
+
+    </div>
+</div>

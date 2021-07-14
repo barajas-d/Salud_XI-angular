@@ -14,8 +14,8 @@
       <button mat-menu-item (click)="navigateListarCentrosMedicos()">Gestión centros médicos</button>
       <button mat-menu-item (click)="navigateListarTipoCita()">Getión tipos de cita</button>
       <button mat-menu-item (click)="navigateListarUsuarios()">Gestión usuarios</button>
-      <button mat-menu-item (click)="navigateListarCuotasModeradoras()">Getión cuotas moderadoras</button>
-      <button mat-menu-item (click)="navigateListarEspecialidadesTipoCita()">Gestión tipos de cita por especialidad</button>
+      <button mat-menu-item (click)="navigateListarCuotasModeradoras()">Parametrizar cuotas moderadoras</button>
+      <button mat-menu-item (click)="navigateListarEspecialidadesTipoCita()">Parametrizar tipos de cita por especialidad</button>
     </mat-menu>
 
     <button mat-button (click)="navigateListarAgendas()">Consultar agendas</button>
@@ -25,5 +25,5 @@
 
     <span class="example-spacer"></span>
 
-    <button mat-stroked-button>Cerrar sesión</button>
+    <button mat-stroked-button (click)="navigateInicio()">Cerrar sesión</button>
 </mat-toolbar>
