@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CentroMedicoDto } from 'src/app/modeloDTO/centro-medico-dto';
 import { EspecialidadDto } from 'src/app/modeloDTO/especialidad-dto';
@@ -11,7 +12,7 @@ import { ProxyMedicosService } from 'src/app/servicios/proxy-medicos.service';
   templateUrl: './actualizar-medicos.component.html',
   styleUrls: ['./actualizar-medicos.component.css']
 })
-export class ActualizarMedicosComponent implements OnInit {
+export class ActualizarMedicosComponent {
 
   //regex para validar datos numericos
   regexNumericos = /^([0-9])*$/
@@ -28,7 +29,7 @@ export class ActualizarMedicosComponent implements OnInit {
   //formGroup para validar campos del formulario
   formGroup: FormGroup;
 
-  constructor(private rutaActiva: ActivatedRoute ,private formBuilder: FormBuilder, private servicioProxyMedicos: ProxyMedicosService, private router: Router) { 
+  constructor(private _snackBar: MatSnackBar, private rutaActiva: ActivatedRoute ,private formBuilder: FormBuilder, private servicioProxyMedicos: ProxyMedicosService, private router: Router) { 
     //parametro pasado por la ruta - cedula del medico
     this.cedulaMedico = this.rutaActiva.snapshot.params.cedulaMedico;
     this.getMedicoByCC();
@@ -63,8 +64,13 @@ export class ActualizarMedicosComponent implements OnInit {
 
     this.servicioProxyMedicos.updateMedico(medicoActualizado).subscribe(
       result => {
-        console.log('Objeto Actualizado: ' + result);
-        this.navigateListarMedicos();
+        if(result == null){
+          this.openSnackBar("No se puede actualizar la información del médico", "Aceptar")
+        }
+        else{
+          this.openSnackBar("Información del médico actualizado", "Aceptar")
+          this.navigateListarMedicos();
+        }
       }
     );
   }
@@ -98,7 +104,8 @@ export class ActualizarMedicosComponent implements OnInit {
     this.router.navigate(['listar-medicos']);
   }
 
-  ngOnInit(): void {
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration: 2000});
   }
 
 }

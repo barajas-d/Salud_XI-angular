@@ -46,6 +46,10 @@ export class NavbarCallCenterComponent implements OnInit {
   }
 
   navigateInicio(){
+    this.router.navigate(['administrador']);
+  }
+
+  navigateCerrarSesion(){
     this.router.navigate(['']);
   }
 

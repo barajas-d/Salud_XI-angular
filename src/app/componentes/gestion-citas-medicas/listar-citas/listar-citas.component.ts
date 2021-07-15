@@ -2,6 +2,7 @@ import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CentroMedicoDto } from 'src/app/modeloDTO/centro-medico-dto';
 import { CitaDTO } from 'src/app/modeloDTO/cita-dto';
@@ -18,7 +19,7 @@ import { DialogDeleteComponent } from '../../layouts/dialog-delete/dialog-delete
   templateUrl: './listar-citas.component.html',
   styleUrls: ['./listar-citas.component.css']
 })
-export class ListarCitasComponent implements OnInit {
+export class ListarCitasComponent {
 
   //Mensaje de eliminacion de objetos
   titleDelete = "Eliminar cita médica"
@@ -40,7 +41,7 @@ export class ListarCitasComponent implements OnInit {
   //table elements
   displayedColumns: string[] = ['fecha', 'sintomatologia', 'tipoCita', 'medico', 'centroMedico', 'cuotaModeradora' , 'acciones'];
 
-  constructor(private dialog: MatDialog, private router: Router, private rutaActiva: ActivatedRoute, private servicioProxyCuotaModeradora: ProxyCuotaModeradoraService, private servicioProxyCitas: ProxyCitasService, private servicioProxyUsuario: ProxyUsuariosService) { 
+  constructor(private _snackBar: MatSnackBar, private dialog: MatDialog, private router: Router, private rutaActiva: ActivatedRoute, private servicioProxyCuotaModeradora: ProxyCuotaModeradoraService, private servicioProxyCitas: ProxyCitasService, private servicioProxyUsuario: ProxyUsuariosService) { 
     //Parametros pasados en la ruta - cedula del usuario
     this.cedulaUsuario = this.rutaActiva.snapshot.params.cedulaUsuario;
     this.getUsuarioByCC();
@@ -117,7 +118,13 @@ export class ListarCitasComponent implements OnInit {
   deleteCitaMedica(idCitaMedica: Number){
     this.servicioProxyCitas.deleteCita(idCitaMedica).subscribe(
       result => {
-        this.getCitasByCCUser(this.lastPage, this.pageSize);
+        if(result == null){
+          this.openSnackBar("No se pueden eliminar la cita médica", "Aceptar")
+        }
+        else{
+          this.openSnackBar("Cita médica eliminada", "Aceptar")
+          this.getCitasByCCUser(this.lastPage, this.pageSize);
+        }
       }
     );
   }
@@ -178,6 +185,10 @@ export class ListarCitasComponent implements OnInit {
     else{
       return "Sin asignar"
     }
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration: 2000});
   }
 
 }

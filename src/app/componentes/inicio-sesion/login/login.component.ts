@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { InicioSesionDTO } from 'src/app/modeloDTO/inicio-sesion-dto';
 import { UsuarioDto } from 'src/app/modeloDTO/usuario-dto';
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   formGroup: FormGroup;
 
-  constructor(private router: Router, private servicioInicioSesion: InicioSesionService, private formBuilder: FormBuilder) { 
+  constructor(private _snackBar: MatSnackBar, private router: Router, private servicioInicioSesion: InicioSesionService, private formBuilder: FormBuilder) { 
 
     //Validaciones del formulario
     this.formGroup = this.formBuilder.group({
@@ -37,7 +38,6 @@ export class LoginComponent implements OnInit {
 
   ingresar() {
     let result = this.servicioInicioSesion.getTypeUser(this.correo, this.contrasena);
-    console.log(result);
     if(result == "administrador"){
       this.router.navigate(['administrador']);
     }
@@ -45,7 +45,11 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['buscar-citas']);
     }
     else{
-      console.log("usuario no encontrado")
+      this.openSnackBar("No se encuentra el usuario", "Aceptar")
     }
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration: 2000});
   }
 }

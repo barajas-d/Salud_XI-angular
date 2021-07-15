@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CuotaModeradoraDto } from 'src/app/modeloDTO/cuota-moderadora-dto';
 import { TipoCitaDTO } from 'src/app/modeloDTO/tipo-cita-dto';
@@ -11,7 +12,7 @@ import { ProxyCuotaModeradoraService } from 'src/app/servicios/proxy-cuota-moder
   templateUrl: './crear-cuota-moderadora.component.html',
   styleUrls: ['./crear-cuota-moderadora.component.css']
 })
-export class CrearCuotaModeradoraComponent implements OnInit {
+export class CrearCuotaModeradoraComponent {
 
   //regex para validar datos numericos
   regexNumericos = /^([0-9])*$/;
@@ -28,7 +29,7 @@ export class CrearCuotaModeradoraComponent implements OnInit {
   //formGroup para validar campos del formulario
   formGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private servicioProxyCuotaModeradora: ProxyCuotaModeradoraService, private router: Router) { 
+  constructor(private _snackBar: MatSnackBar, private formBuilder: FormBuilder, private servicioProxyCuotaModeradora: ProxyCuotaModeradoraService, private router: Router) { 
     //Obciones de formulario
     this.getAllTiposCitas();
     this.getAllTiposContrato();
@@ -52,8 +53,13 @@ export class CrearCuotaModeradoraComponent implements OnInit {
     let nuevaCuotaModeradora = new CuotaModeradoraDto(this.tipoCitaSeleccionada, this.tipoContratoSeleccionado, this.valor);
     this.servicioProxyCuotaModeradora.addCuotaModeradora(nuevaCuotaModeradora).subscribe(
       result => {
-        console.log('result: ' + result.id);
-        this.navigateListarCuotasModeradoras();
+        if(result == null){
+          this.openSnackBar("Esta cuota moderadora ya esta parametrizada", "Aceptar")
+        }
+        else{
+          this.openSnackBar("Parametro para cuota moderadora creado", "Aceptar")
+          this.navigateListarCuotasModeradoras();
+        }
       }
     );
   }
@@ -78,7 +84,8 @@ export class CrearCuotaModeradoraComponent implements OnInit {
     this.router.navigate(['listar-cuotas-moderadoras']);
   }
 
-  ngOnInit(): void {
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration: 2000});
   }
 
 }

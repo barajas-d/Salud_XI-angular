@@ -17,7 +17,6 @@ export class InicioSesionService {
   getTypeUser(correo: String, contrasena: String){
     let rolReturn: String = null;
     this.usuariosInicioSesion.forEach(element => {
-      console.log(element.correo + ' == ' + correo);
       if(element.correo == correo){
         if(element.contrasena == contrasena){
           rolReturn = element.rol;

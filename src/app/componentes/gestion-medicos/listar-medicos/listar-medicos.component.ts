@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MedicoDto } from 'src/app/modeloDTO/medico-dto';
 import { ProxyMedicosService } from 'src/app/servicios/proxy-medicos.service';
@@ -11,7 +12,7 @@ import { DialogDeleteComponent } from '../../layouts/dialog-delete/dialog-delete
   templateUrl: './listar-medicos.component.html',
   styleUrls: ['./listar-medicos.component.css']
 })
-export class ListarMedicosComponent implements OnInit {
+export class ListarMedicosComponent {
 
   listaMedicos: MedicoDto[] = [];
 
@@ -27,7 +28,7 @@ export class ListarMedicosComponent implements OnInit {
 
   displayedColumns: string[] = ['nombre', 'cedula', 'especialidad', 'intensidadHoraria', "centroMedico", 'acciones'];
 
-  constructor(private dialog: MatDialog, private servicioProxyMedico: ProxyMedicosService, private router: Router) { 
+  constructor(private _snackBar: MatSnackBar, private dialog: MatDialog, private servicioProxyMedico: ProxyMedicosService, private router: Router) { 
     this.getMedicos(0, this.pageSize);
   }
 
@@ -64,8 +65,7 @@ export class ListarMedicosComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       result => {
         if(result == true){
-          this.deleteMedico(medicoSeleccionado)    
-          console.log('medico eliminado')    
+          this.deleteMedico(medicoSeleccionado);  
         }
       }
     );
@@ -75,12 +75,19 @@ export class ListarMedicosComponent implements OnInit {
     this.servicioProxyMedico.deleteMedico(medicoSeleccionado).subscribe(
       result =>{
         console.log(result);
-        this.getMedicos(this.lastPage, this.pageSize);
+        if(result == null){
+          this.openSnackBar("El médico no se puede eliminar", "Aceptar")
+        }
+        else{
+          this.openSnackBar("Médico eliminado correctamente", "Aceptar")
+          this.getMedicos(this.lastPage, this.pageSize);
+        }
       }
     );
   }
 
-  ngOnInit(): void {
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration: 2000});
   }
 
 }

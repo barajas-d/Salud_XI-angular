@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TipoContratoDto } from 'src/app/modeloDTO/tipo-contrato-dto';
 import { UbicacionDto } from 'src/app/modeloDTO/ubicacion-dto';
@@ -11,7 +12,7 @@ import { ProxyUsuariosService } from 'src/app/servicios/proxy-usuarios.service';
   templateUrl: './crear-usuarios.component.html',
   styleUrls: ['./crear-usuarios.component.css']
 })
-export class CrearUsuariosComponent implements OnInit {
+export class CrearUsuariosComponent {
 
   //regex para validar datos numericos
   regexNumericos = /^([0-9])*$/;
@@ -30,7 +31,7 @@ export class CrearUsuariosComponent implements OnInit {
   //formGroup para validar campos del formulario
   formGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private servicioProxyUsuarios: ProxyUsuariosService, private router: Router) { 
+  constructor(private _snackBar: MatSnackBar, private formBuilder: FormBuilder, private servicioProxyUsuarios: ProxyUsuariosService, private router: Router) { 
 
     //Obciones de formulario
     this.getAllUbicaciones();
@@ -42,7 +43,8 @@ export class CrearUsuariosComponent implements OnInit {
         Validators.required
       ]),
       correo: new FormControl('', [
-        Validators.required
+        Validators.required,
+        Validators.email
       ]),
       ubicacion: new FormControl('', [
         Validators.required
@@ -61,7 +63,16 @@ export class CrearUsuariosComponent implements OnInit {
     let nuevoUsuario = new UsuarioDto(this.nombre, this.cedula, this.correo, this.tipoContratoSeleccionado, this.ubicacionSeleccionada);
     this.servicioProxyUsuarios.addUsuario(nuevoUsuario).subscribe(
       result => {
-        this.navigateListarUsuario();
+        if(result == null){
+          this.openSnackBar("El usuario con cedula " + this.cedula + " ya existe", "Aceptar")
+        }
+        else{
+          this.openSnackBar("Usuario creado correctamente", "Aceptar")
+          this.navigateListarUsuario();
+        }
+      },
+      error => {
+        console.log(error);
       }
     );
   }
@@ -86,7 +97,8 @@ export class CrearUsuariosComponent implements OnInit {
     this.router.navigate(['listar-usuarios']);
   }
 
-  ngOnInit(): void {
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration: 2000});
   }
 
 }

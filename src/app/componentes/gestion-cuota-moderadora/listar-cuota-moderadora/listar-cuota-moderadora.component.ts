@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CuotaModeradoraDto } from 'src/app/modeloDTO/cuota-moderadora-dto';
 import { TipoCitaDTO } from 'src/app/modeloDTO/tipo-cita-dto';
@@ -14,7 +15,7 @@ import { DialogDeleteComponent } from '../../layouts/dialog-delete/dialog-delete
   templateUrl: './listar-cuota-moderadora.component.html',
   styleUrls: ['./listar-cuota-moderadora.component.css']
 })
-export class ListarCuotaModeradoraComponent implements OnInit {
+export class ListarCuotaModeradoraComponent {
 
   listaCuotasModeradoras: CuotaModeradoraDto[] = [];
   
@@ -30,7 +31,7 @@ export class ListarCuotaModeradoraComponent implements OnInit {
   
   displayedColumns: string[] = ['tipoCita', 'tiposContrato', 'valor', 'acciones'];
 
-  constructor(private dialog: MatDialog, private servicioProxyCuotaModeradora: ProxyCuotaModeradoraService, private router: Router) { 
+  constructor(private _snackBar: MatSnackBar, private dialog: MatDialog, private servicioProxyCuotaModeradora: ProxyCuotaModeradoraService, private router: Router) { 
     this.getCuotasModeradoras(0, this.pageSize);
   }
 
@@ -64,7 +65,6 @@ export class ListarCuotaModeradoraComponent implements OnInit {
       result => {
         if(result == true){
           this.deleteCuotaModeradora(idCuotaModeradora);
-          console.log('cuota moderadora eliminada');
         }
       }
     );
@@ -73,12 +73,20 @@ export class ListarCuotaModeradoraComponent implements OnInit {
   deleteCuotaModeradora(idCuotaModeradora: Number){
     this.servicioProxyCuotaModeradora.deleteCuotaModeradora(idCuotaModeradora).subscribe(
       result => {
-        this.getCuotasModeradoras(this.lastPage, this.pageSize);
+        if(result == null){
+          this.openSnackBar("No se puede eliminar el parametro de cuota moderadora", "Aceptar")
+        }
+        else{
+          this.openSnackBar("Parametro eliminado", "Aceptar")
+          this.getCuotasModeradoras(this.lastPage, this.pageSize);
+        }
+
       }
     );
   }
 
-  ngOnInit(): void {
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration: 2000});
   }
 
 }

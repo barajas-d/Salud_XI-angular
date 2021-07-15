@@ -23,6 +23,7 @@
                         <input matInput [(ngModel)]="correo" type="email" name="Correo" formControlName="correo" autocomplete="off">
                         <!--validaciones campo correo-->
                         <mat-error *ngIf="formGroup.controls.correo.hasError('required')">Correo requerido</mat-error>
+                        <mat-error *ngIf="formGroup.controls.correo.hasError('email')">Formato de correo no valido</mat-error>
                     </mat-form-field>
             
                     <h4>Ubicación de residencia</h4>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UsuarioDto } from 'src/app/modeloDTO/usuario-dto';
 import { ProxyUsuariosService } from 'src/app/servicios/proxy-usuarios.service';
@@ -12,7 +13,7 @@ import { DialogDeleteComponent } from '../../layouts/dialog-delete/dialog-delete
   styleUrls: ['./listar-usuarios.component.css']
 })
 
-export class ListarUsuariosComponent implements OnInit {
+export class ListarUsuariosComponent {
 
   listaUsuarios: UsuarioDto[] = [];
 
@@ -28,7 +29,7 @@ export class ListarUsuariosComponent implements OnInit {
 
   displayedColumns: string[] = ['nombre', 'cedula', 'correo', 'tipoContrato', "ubicacion", 'acciones'];
 
-  constructor(private dialog: MatDialog, private servicioProxyUsuario: ProxyUsuariosService, private router: Router) {
+  constructor(private _snackBar: MatSnackBar, private dialog: MatDialog, private servicioProxyUsuario: ProxyUsuariosService, private router: Router) {
     this.getUsuarios(0, this.pageSize);
   }
 
@@ -57,8 +58,13 @@ export class ListarUsuariosComponent implements OnInit {
   deleteUsuario(idUsuarioSeleccionado: Number){
     this.servicioProxyUsuario.deleteUsuario(idUsuarioSeleccionado).subscribe(
       result => {
-        console.log(result);
-        this.getUsuarios(this.lastPage, this.pageSize);
+        if(result == null){
+          this.openSnackBar("No es posible eliminar el usuario", "Aceptar")
+        }
+        else{
+          this.openSnackBar("Usuario eliminado correctamente", "Aceptar")
+          this.getUsuarios(this.lastPage, this.pageSize);
+        }
       }
     );
   }
@@ -74,15 +80,14 @@ export class ListarUsuariosComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       result => {
         if(result == true){
-          this.deleteUsuario(idUsuarioSeleccionado)    
-          console.log('usuario eliminado')    
+          this.deleteUsuario(idUsuarioSeleccionado);  
         }
       }
     );
   }
 
-  ngOnInit(): void {
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration: 2000});
   }
-
 
 }

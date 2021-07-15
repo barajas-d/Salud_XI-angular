@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CentroMedicoDto } from 'src/app/modeloDTO/centro-medico-dto';
 import { UbicacionDto } from 'src/app/modeloDTO/ubicacion-dto';
@@ -15,7 +16,7 @@ import { DialogDeleteComponent } from '../../layouts/dialog-delete/dialog-delete
   templateUrl: './actualizar-centros-medicos.component.html',
   styleUrls: ['./actualizar-centros-medicos.component.css']
 })
-export class ActualizarCentrosMedicosComponent implements OnInit {
+export class ActualizarCentrosMedicosComponent{
 
   listaUbicaciones: UbicacionesCentroMedicoDTO[] = [];
   listaUbicacionesOpciones: UbicacionDto[] = [];
@@ -39,7 +40,7 @@ export class ActualizarCentrosMedicosComponent implements OnInit {
   //formGroup para validar campos del formulario
   formGroup: FormGroup;
 
-  constructor(private dialog: MatDialog, private rutaActiva: ActivatedRoute, private formBuilder: FormBuilder, private servicioProxyCentrosMedicos: ProxyCentrosMedicosService, private router: Router, private servicioProxyUsuarios: ProxyUsuariosService) { 
+  constructor(private _snackBar: MatSnackBar, private dialog: MatDialog, private rutaActiva: ActivatedRoute, private formBuilder: FormBuilder, private servicioProxyCentrosMedicos: ProxyCentrosMedicosService, private router: Router, private servicioProxyUsuarios: ProxyUsuariosService) { 
     //parametro pasado por la ruta - id centro medico
     this.idCentroMedico = this.rutaActiva.snapshot.params.idCentroMedico;
     this.getCentroMedico();
@@ -62,8 +63,18 @@ export class ActualizarCentrosMedicosComponent implements OnInit {
 
     this.servicioProxyCentrosMedicos.updateCentroMedico(CentroMedicoActualizado).subscribe(
       result => {
-        console.log(result);
-        this.navigateListarCentrosMedicos();
+        if(result == null){
+          this.openSnackBar("No se puede actualizar este centro médico", "Aceptar")
+        }
+        else{
+          this.navigateListarCentrosMedicos();
+          if(result){
+            this.openSnackBar("Centro médico actualizado", "Aceptar")
+          }
+          else{
+            this.openSnackBar("No se encuentra en centro médico", "Aceptar")
+          }
+        }
       }
     );
   }
@@ -111,8 +122,8 @@ export class ActualizarCentrosMedicosComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       result => {
         if(result == true){
-          this.deleteUbicacionCentroMedico(medicoSeleccionado)    
-          console.log('medico eliminado')    
+          this.openSnackBar("Ubicacion eliminada del centro médico", "Aceptar")
+          this.deleteUbicacionCentroMedico(medicoSeleccionado);
         }
       }
     );
@@ -135,12 +146,19 @@ export class ActualizarCentrosMedicosComponent implements OnInit {
     let ubicacionCentroMedico = new UbicacionesCentroMedicoDTO(this.idCentroMedico, this.ubicacionSeleccionada);
     this.servicioProxyCentrosMedicos.addUbicacionCentroMedico(ubicacionCentroMedico).subscribe(
       result => {
-        this.getUbicacionesCentroMedico(this.lastPage, this.pageSize);
+        if(result == null){
+          this.openSnackBar("La ubicación ya esta registrada a este centro médico", "Aceptar")
+        }
+        else{
+          this.openSnackBar("Ubicacion añadida al centro médico", "Aceptar")
+          this.getUbicacionesCentroMedico(this.lastPage, this.pageSize);
+        }
       }
     );
   }
 
-  ngOnInit(): void {
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration: 2000});
   }
 
 }

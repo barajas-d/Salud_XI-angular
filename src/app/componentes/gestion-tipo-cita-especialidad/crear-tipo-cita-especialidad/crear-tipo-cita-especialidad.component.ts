@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { EspecialidadDto } from 'src/app/modeloDTO/especialidad-dto';
 import { TipoCitaDTO } from 'src/app/modeloDTO/tipo-cita-dto';
@@ -11,7 +12,7 @@ import { ProxyTipoCitaEspecialidadService } from 'src/app/servicios/proxy-tipo-c
   templateUrl: './crear-tipo-cita-especialidad.component.html',
   styleUrls: ['./crear-tipo-cita-especialidad.component.css']
 })
-export class CrearTipoCitaEspecialidadComponent implements OnInit {
+export class CrearTipoCitaEspecialidadComponent {
 
   //datos obtenidos del formulario
   especialidadSeleccionada: Number;
@@ -24,7 +25,7 @@ export class CrearTipoCitaEspecialidadComponent implements OnInit {
   //formGroup para validar campos del formulario
   formGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private servicioProxyTipoCitaEspecialidad: ProxyTipoCitaEspecialidadService, private router: Router) { 
+  constructor(private _snackBar: MatSnackBar, private formBuilder: FormBuilder, private servicioProxyTipoCitaEspecialidad: ProxyTipoCitaEspecialidadService, private router: Router) { 
     
     //Obciones de formulario
     this.getAllEspecialidades();
@@ -46,8 +47,13 @@ export class CrearTipoCitaEspecialidadComponent implements OnInit {
     let nuevoTipoCitaEspecialidad = new TipoCitaEspecialidadDto(this.especialidadSeleccionada, this.tipoCitaSeleccionado);
     this.servicioProxyTipoCitaEspecialidad.addTipoCitaEspecialidad(nuevoTipoCitaEspecialidad).subscribe(
       result => {
-        console.log('result: ' + result.id);
-        this.navigateListarTipoCitaEspecialidad();
+        if(result == null){
+          this.openSnackBar("El parametro ya existe", "Aceptar")
+        }
+        else{
+          this.openSnackBar("Parametro creado correctamente", "Aceptar")
+          this.navigateListarTipoCitaEspecialidad();
+        }
       }
     );
   }
@@ -72,7 +78,8 @@ export class CrearTipoCitaEspecialidadComponent implements OnInit {
     this.router.navigate(['listar-tipo-cita-especialidad']);
   }
 
-  ngOnInit(): void {
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration: 2000});
   }
 
 }

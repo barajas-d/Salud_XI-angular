@@ -2,6 +2,7 @@ import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CentroMedicoDto } from 'src/app/modeloDTO/centro-medico-dto';
 import { ProxyCentrosMedicosService } from 'src/app/servicios/proxy-centros-medicos.service';
@@ -12,7 +13,7 @@ import { DialogDeleteComponent } from '../../layouts/dialog-delete/dialog-delete
   templateUrl: './listar-centros-medicos.component.html',
   styleUrls: ['./listar-centros-medicos.component.css']
 })
-export class ListarCentrosMedicosComponent implements OnInit {
+export class ListarCentrosMedicosComponent {
 
   listaCentrosMedicos: CentroMedicoDto[] = []; 
 
@@ -28,7 +29,7 @@ export class ListarCentrosMedicosComponent implements OnInit {
 
   displayedColumns: string[] = ['nombre', 'acciones'];
 
-  constructor(private dialog: MatDialog, private servicioProxyCentroMedico: ProxyCentrosMedicosService, private router: Router) { 
+  constructor(private _snackBar: MatSnackBar, private dialog: MatDialog, private servicioProxyCentroMedico: ProxyCentrosMedicosService, private router: Router) { 
     this.getCentrosMedicos(0, this.pageSize);
   }
 
@@ -57,8 +58,13 @@ export class ListarCentrosMedicosComponent implements OnInit {
   deleteCentroMedico(medicoSeleccionado: Number){
     this.servicioProxyCentroMedico.deleteCentroMedico(medicoSeleccionado).subscribe(
       result =>{
-        console.log(result);
-        this.getCentrosMedicos(this.lastPage, this.pageSize);
+        if(result == null){
+          this.openSnackBar("No se puede eliminar el centro médico, Asegérese de que no tenga médicos asociados", "Aceptar")
+        }
+        else{
+          this.openSnackBar("Centro médico eliminado", "Aceptar")
+          this.getCentrosMedicos(this.lastPage, this.pageSize);
+        }
       }
     );
   }
@@ -81,7 +87,8 @@ export class ListarCentrosMedicosComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration: 3000});
   }
 
 }

@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { resolve } from 'dns';
 import { promise } from 'protractor';
 import { CitaDTO } from 'src/app/modeloDTO/cita-dto';
+import { UsuarioDto } from 'src/app/modeloDTO/usuario-dto';
 import { ProxyCitasService } from 'src/app/servicios/proxy-citas.service';
+import { ProxyUsuariosService } from 'src/app/servicios/proxy-usuarios.service';
 import { resourceLimits } from 'worker_threads';
 
 @Component({
@@ -12,15 +15,16 @@ import { resourceLimits } from 'worker_threads';
   templateUrl: './buscar-citas.component.html',
   styleUrls: ['./buscar-citas.component.css']
 })
-export class BuscarCitasComponent implements OnInit {
+export class BuscarCitasComponent {
 
   formGroup: FormGroup;
 
-  citaNueva: CitaDTO;
-
+  //Datos del usuario
   cedulaUsuario: Number;
+  usuario: UsuarioDto = null;
+  usuarioCargado: Boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private servicioProxyCitas: ProxyCitasService, private router: Router) {
+  constructor(private _snackBar: MatSnackBar, private formBuilder: FormBuilder, private servicioProxyUsuario: ProxyUsuariosService, private router: Router) {
     //Validaciones del formulario
 
     let regexNumerico = /^[0-9]*$/
@@ -32,29 +36,22 @@ export class BuscarCitasComponent implements OnInit {
     });
 
   }
-
-  ngOnInit(): void {
-  }
   
   navigateListarCitas(){
-    this.router.navigate(['listar-citas/' + this.cedulaUsuario]);
+    this.servicioProxyUsuario.getUsuarioByCC(this.cedulaUsuario).subscribe(
+      result => {
+        if(result == null){
+          this.openSnackBar("No se encontro el usuario con cedula " + this.cedulaUsuario, "Aceptar")
+        }
+        else{
+          this.router.navigate(['listar-citas/' + this.cedulaUsuario]);
+        }
+      }
+    );
   }
 
-  addCita(){
-    let citaDTO = new CitaDTO(1,1,1);
-    console.log('Cita A Crear: ', citaDTO);
-
-    this.servicioProxyCitas.addCita(citaDTO).subscribe(result => {
-      this.citaNueva = result;
-      console.log('llega: ' + this.citaNueva.id);
-    });
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration: 2000});
   }
-
-  deleteCita(){
-    let id = 1
-    this.servicioProxyCitas.deleteCita(id).subscribe(result => {
-      console.log('llega: ' + result);
-    });
-  }
-
+  
 }

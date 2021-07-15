@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TipoCitaDTO } from 'src/app/modeloDTO/tipo-cita-dto';
 import { ProxyTiposCitaService } from 'src/app/servicios/proxy-tipos-cita.service';
@@ -9,7 +10,7 @@ import { ProxyTiposCitaService } from 'src/app/servicios/proxy-tipos-cita.servic
   templateUrl: './actualizar-tipo-citas.component.html',
   styleUrls: ['./actualizar-tipo-citas.component.css']
 })
-export class ActualizarTipoCitasComponent implements OnInit {
+export class ActualizarTipoCitasComponent {
 
   //regex para validar datos numericos
   regexNumericos = /^([0-9]){1,3}$/;
@@ -22,7 +23,7 @@ export class ActualizarTipoCitasComponent implements OnInit {
   //formGroup para validar campos del formulario
   formGroup: FormGroup;
 
-  constructor(private rutaActiva: ActivatedRoute, private formBuilder: FormBuilder, private servicioProxyTipoCita: ProxyTiposCitaService, private router: Router) { 
+  constructor(private _snackBar: MatSnackBar, private rutaActiva: ActivatedRoute, private formBuilder: FormBuilder, private servicioProxyTipoCita: ProxyTiposCitaService, private router: Router) { 
     //parametro pasado por la ruta - cedula del medico
     this.idTipoCita = this.rutaActiva.snapshot.params.idTipoCita;
     this.getTipoCitaById();
@@ -47,8 +48,13 @@ export class ActualizarTipoCitasComponent implements OnInit {
 
     this.servicioProxyTipoCita.updateTipoCita(tipoCitaActualizado).subscribe(
       result => {
-        console.log('result: ' + result.id);
-        this.navigateListarTipoCita();
+        if(result == null){
+          this.openSnackBar("No se puede actualizar la información del tipo de cita", "Aceptar")
+        }
+        else{
+          this.openSnackBar("El tipo de cita fue actualizado correctamente", "Aceptar")
+          this.navigateListarTipoCita();
+        }
       }
     );
   }
@@ -66,7 +72,8 @@ export class ActualizarTipoCitasComponent implements OnInit {
     this.router.navigate(['listar-tipo-cita']);
   }
 
-  ngOnInit(): void {
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration: 2000});
   }
 
 }

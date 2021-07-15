@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TipoCitaDTO } from 'src/app/modeloDTO/tipo-cita-dto';
 import { ProxyTiposCitaService } from 'src/app/servicios/proxy-tipos-cita.service';
@@ -11,7 +12,7 @@ import { DialogDeleteComponent } from '../../layouts/dialog-delete/dialog-delete
   templateUrl: './listar-tipos-cita.component.html',
   styleUrls: ['./listar-tipos-cita.component.css']
 })
-export class ListarTiposCitaComponent implements OnInit {
+export class ListarTiposCitaComponent {
 
   listaTiposCita: TipoCitaDTO[] = [];
 
@@ -27,7 +28,7 @@ export class ListarTiposCitaComponent implements OnInit {
 
   displayedColumns: string[] = ['nombre', 'duracion', 'acciones'];
 
-  constructor(private dialog: MatDialog, private servicioProxyTipoCita: ProxyTiposCitaService, private router: Router) { 
+  constructor(private _snackBar: MatSnackBar, private dialog: MatDialog, private servicioProxyTipoCita: ProxyTiposCitaService, private router: Router) { 
     this.getTiposCita(0, this.pageSize);
   }
 
@@ -64,8 +65,7 @@ export class ListarTiposCitaComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       result => {
         if(result == true){
-          this.deleteTipoCita(idTipoCita)    
-          console.log('medico eliminado')    
+          this.deleteTipoCita(idTipoCita);    
         }
       }
     );
@@ -74,12 +74,19 @@ export class ListarTiposCitaComponent implements OnInit {
   deleteTipoCita(idTipoCita: Number){
     this.servicioProxyTipoCita.deleteTipoCita(idTipoCita).subscribe(
       result => {
-        this.getTiposCita(this.lastPage, this.pageSize);
+        if(null){
+          this.openSnackBar("El tipo de cita no puede ser eliminado", "Aceptar")
+        }
+        else{
+          this.openSnackBar("Se elimino el tipo de cita correctamente", "Aceptar")
+          this.getTiposCita(this.lastPage, this.pageSize);
+        }
       }
     );
   }
 
-  ngOnInit(): void {
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration: 2000});
   }
 
 }

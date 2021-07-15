@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TipoContratoDto } from 'src/app/modeloDTO/tipo-contrato-dto';
 import { UbicacionDto } from 'src/app/modeloDTO/ubicacion-dto';
@@ -11,7 +12,7 @@ import { ProxyUsuariosService } from 'src/app/servicios/proxy-usuarios.service';
   templateUrl: './actualizar-usuarios.component.html',
   styleUrls: ['./actualizar-usuarios.component.css']
 })
-export class ActualizarUsuariosComponent implements OnInit {
+export class ActualizarUsuariosComponent {
 
   //regex para validar datos numericos
   regexNumericos = /^([0-9])*$/;
@@ -28,7 +29,7 @@ export class ActualizarUsuariosComponent implements OnInit {
   //formGroup para validar campos del formulario
   formGroup: FormGroup;
 
-  constructor(private rutaActiva: ActivatedRoute, private formBuilder: FormBuilder, private servicioProxyUsuarios: ProxyUsuariosService, private router: Router) { 
+  constructor(private _snackBar: MatSnackBar, private rutaActiva: ActivatedRoute, private formBuilder: FormBuilder, private servicioProxyUsuarios: ProxyUsuariosService, private router: Router) { 
     //parametro pasado por la ruta - cedula del usuario
     this.idUsuario = this.rutaActiva.snapshot.params.idUsuario;
     this.getUsuarioByCC();
@@ -43,7 +44,8 @@ export class ActualizarUsuariosComponent implements OnInit {
         Validators.required
       ]),
       correo: new FormControl('', [
-        Validators.required
+        Validators.required,
+        Validators.email
       ]),
       ubicacion: new FormControl('', [
         Validators.required
@@ -64,7 +66,13 @@ export class ActualizarUsuariosComponent implements OnInit {
     
     this.servicioProxyUsuarios.updateUsuario(usuarioActualizado).subscribe(
       result => {
-        this.navigateListarUsuario();
+        if(result == null){
+          this.openSnackBar("No se puede actualizar la información del usuario", "Aceptar")
+        }
+        else{
+          this.openSnackBar("Usuario actualizado", "Aceptar")
+          this.navigateListarUsuario();
+        }
       }
     );
   }
@@ -98,8 +106,8 @@ export class ActualizarUsuariosComponent implements OnInit {
     this.router.navigate(['listar-usuarios']);
   }
 
-
-  ngOnInit(): void {
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration: 2000});
   }
 
 }

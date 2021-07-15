@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CentroMedicoDto } from 'src/app/modeloDTO/centro-medico-dto';
 import { EspecialidadDto } from 'src/app/modeloDTO/especialidad-dto';
@@ -11,7 +12,7 @@ import { ProxyMedicosService } from 'src/app/servicios/proxy-medicos.service';
   templateUrl: './crear-medicos.component.html',
   styleUrls: ['./crear-medicos.component.css']
 })
-export class CrearMedicosComponent implements OnInit {
+export class CrearMedicosComponent {
 
   //regex para validar datos numericos
   regexNumericos = /^([0-9])*$/
@@ -30,7 +31,7 @@ export class CrearMedicosComponent implements OnInit {
   //formGroup para validar campos del formulario
   formGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private servicioProxyMedicos: ProxyMedicosService, private router: Router) { 
+  constructor(private _snackBar: MatSnackBar, private formBuilder: FormBuilder, private servicioProxyMedicos: ProxyMedicosService, private router: Router) { 
 
     //Obciones de formulario
     this.getAllEspecialidades();
@@ -61,7 +62,13 @@ export class CrearMedicosComponent implements OnInit {
     let nuevoMedico = new MedicoDto(this.nombre, this.cedula, this.intensidadHorariaSeleccionada, this.centroMedicoSeleccionado, this.especialidadSeleccionada);
     this.servicioProxyMedicos.addMedico(nuevoMedico).subscribe(
       result => {
-        this.navigateListarMedicos();
+        if(result == null){
+          this.openSnackBar("No es posible crear al médico con esta información", "Aceptar")
+        }
+        else{
+          this.openSnackBar("Nuevo médico creado", "Aceptar")
+          this.navigateListarMedicos();
+        }
       }
     );
   }
@@ -86,7 +93,8 @@ export class CrearMedicosComponent implements OnInit {
     this.router.navigate(['listar-medicos']);
   }
 
-  ngOnInit(): void {
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration: 2000});
   }
 
 }

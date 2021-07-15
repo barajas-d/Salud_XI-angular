@@ -15,20 +15,9 @@ import { CrearUsuariosComponent } from './componentes/gestion-usuarios/crear-usu
 import { ListarUsuariosComponent } from './componentes/gestion-usuarios/listar-usuarios/listar-usuarios.component';
 import { ListarCitasComponent } from './componentes/gestion-citas-medicas/listar-citas/listar-citas.component';
 import { CrearCitasComponent } from './componentes/gestion-citas-medicas/crear-citas/crear-citas.component';
-/**
- * Angular Material
- */
-import { MatGridListModule } from '@angular/material/grid-list';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { NavbarCallCenterComponent } from './componentes/layouts/navbar-call-center/navbar-call-center.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
-import { MatSelectModule } from '@angular/material/select';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { ActualizarMedicosComponent } from './componentes/gestion-medicos/actualizar-medicos/actualizar-medicos.component';
+import { ActualizarUsuariosComponent } from './componentes/gestion-usuarios/actualizar-usuarios/actualizar-usuarios.component';
+import { ActualizarTipoCitasComponent } from './componentes/gestion-tipo-citas/actualizar-tipo-citas/actualizar-tipo-citas.component';
 import { ListarMedicosComponent } from './componentes/gestion-medicos/listar-medicos/listar-medicos.component';
 import { CrearMedicosComponent } from './componentes/gestion-medicos/crear-medicos/crear-medicos.component';
 import { CrearCuotaModeradoraComponent } from './componentes/gestion-cuota-moderadora/crear-cuota-moderadora/crear-cuota-moderadora.component';
@@ -39,20 +28,32 @@ import { ListarTipoCitaEspecialidadComponent } from './componentes/gestion-tipo-
 import { CrearTipoCitaEspecialidadComponent } from './componentes/gestion-tipo-cita-especialidad/crear-tipo-cita-especialidad/crear-tipo-cita-especialidad.component';
 import { ListarAgendaComponent } from './componentes/gestion-agendas/listar-agenda/listar-agenda.component';
 import { GenerarAgendasComponent } from './componentes/gestion-agendas/generar-agendas/generar-agendas.component';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AdministradorComponent } from './componentes/layouts/administrador/administrador.component';
 import { ListarCentrosMedicosComponent } from './componentes/gestion-centros-medicos/listar-centros-medicos/listar-centros-medicos.component';
 import { CrearCentrosMedicosComponent } from './componentes/gestion-centros-medicos/crear-centros-medicos/crear-centros-medicos.component';
 import { ActualizarCentrosMedicosComponent } from './componentes/gestion-centros-medicos/actualizar-centros-medicos/actualizar-centros-medicos.component';
+import { NavbarCallCenterComponent } from './componentes/layouts/navbar-call-center/navbar-call-center.component';
+import { DialogDeleteComponent } from './componentes/layouts/dialog-delete/dialog-delete.component';
+/**
+ * Angular Material
+ */
+import { MatGridListModule } from '@angular/material/grid-list';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DialogDeleteComponent } from './componentes/layouts/dialog-delete/dialog-delete.component';
 import { MatDividerModule } from '@angular/material/divider';
-import { ActualizarMedicosComponent } from './componentes/gestion-medicos/actualizar-medicos/actualizar-medicos.component';
-import { ActualizarUsuariosComponent } from './componentes/gestion-usuarios/actualizar-usuarios/actualizar-usuarios.component';
-import { ActualizarTipoCitasComponent } from './componentes/gestion-tipo-citas/actualizar-tipo-citas/actualizar-tipo-citas.component';
 import { NavbarAdministradorComponent } from './componentes/layouts/navbar-administrador/navbar-administrador.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,8 @@ import { NavbarAdministradorComponent } from './componentes/layouts/navbar-admin
     MatNativeDateModule,
     MatMenuModule,
     MatDialogModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

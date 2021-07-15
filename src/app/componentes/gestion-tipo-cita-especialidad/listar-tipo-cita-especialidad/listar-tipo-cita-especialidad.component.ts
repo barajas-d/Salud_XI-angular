@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TipoCitaEspecialidadDto } from 'src/app/modeloDTO/tipo-cita-especialidad-dto';
 import { ProxyTipoCitaEspecialidadService } from 'src/app/servicios/proxy-tipo-cita-especialidad.service';
@@ -11,7 +12,7 @@ import { DialogDeleteComponent } from '../../layouts/dialog-delete/dialog-delete
   templateUrl: './listar-tipo-cita-especialidad.component.html',
   styleUrls: ['./listar-tipo-cita-especialidad.component.css']
 })
-export class ListarTipoCitaEspecialidadComponent implements OnInit {
+export class ListarTipoCitaEspecialidadComponent {
 
   listaTipoCitaEspecialidad: TipoCitaEspecialidadDto[] = [];
 
@@ -27,7 +28,7 @@ export class ListarTipoCitaEspecialidadComponent implements OnInit {
 
   displayedColumns: string[] = ['especialidad', 'tipoCita', 'acciones'];
 
-  constructor(private dialog: MatDialog, private servicioProxyTipoCitaEspecialidad: ProxyTipoCitaEspecialidadService, private router: Router) { 
+  constructor(private _snackBar: MatSnackBar, private dialog: MatDialog, private servicioProxyTipoCitaEspecialidad: ProxyTipoCitaEspecialidadService, private router: Router) { 
     this.getTipoCitaEspecialidad(0, this.pageSize);
   }
 
@@ -60,8 +61,7 @@ export class ListarTipoCitaEspecialidadComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       result => {
         if(result == true){
-          this.deleteParametro(idParametro);    
-          console.log('parametro eliminado')
+          this.deleteParametro(idParametro);
         }
       }
     );
@@ -70,12 +70,19 @@ export class ListarTipoCitaEspecialidadComponent implements OnInit {
   deleteParametro(idParametro: Number){
     this.servicioProxyTipoCitaEspecialidad.deleteTipoCitaEspecialidad(idParametro).subscribe(
       result => {
-        this.getTipoCitaEspecialidad(this.lastPage, this.pageSize);
+        if(result == null){
+          this.openSnackBar("No se puede eliminar el parametro", "Aceptar")
+        }
+        else{
+          this.openSnackBar("Parametro eliminado correctamente", "Aceptar")
+          this.getTipoCitaEspecialidad(this.lastPage, this.pageSize);
+        }
       }
     );
   }
 
-  ngOnInit(): void {
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration: 2000});
   }
 
 }
