@@ -16,10 +16,9 @@
 }
 
 .input{
-    width: 70%;
+    width: 100%;
 }
 
 .button{
     float: left;
-    margin-left: 15%;
 }

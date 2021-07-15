@@ -44,6 +44,9 @@ export class LoginComponent implements OnInit {
     else if(result == "call-center"){
       this.router.navigate(['buscar-citas']);
     }
+    else if(result == "password"){
+      this.openSnackBar("Contraseña incorrecta", "Aceptar")
+    }
     else{
       this.openSnackBar("No se encuentra el usuario", "Aceptar")
     }
